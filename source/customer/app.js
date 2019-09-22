@@ -1,24 +1,21 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
 const request = require('request')
-
 const PORT = 8080;
 
-app.get('/',(req,res)=> {
-    let key = "An1512277"
-    let english = "hello"
-    
-    request.get('http://localhost:4000/engvies/' + key +"/true/" + english,function(err,result,body){
-        if(err){
-            console.log(err)
-        }
-        else
-        res.send(body)
-    })
-   
-});
+let apiCall = require('./api.js')
+// SDK example
+let key = "5c9676a9f448181b63448971"
+let word = "hello"
+let url = 'http://localhost:4000/engvies/'
+//apiCall.callApi(url,key,word)
+
+// apiCall.callApi("1",key,word)
+
+app.get('/', (req,res)=>{
+    res.send(apiCall.callApi(url,key,word)+ "hello")
+})
 
 app.use(bodyParser.json());
 app.listen(PORT,()=> console.log('Listening on PORT '+ PORT));

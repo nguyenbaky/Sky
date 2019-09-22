@@ -1,5 +1,58 @@
 {
-    "keygen":[
-        {"id":"1","key_name":"An1512277x36l2bvn","init_date":"2019-08-02","end_date":"2029-09-10"}
-    ]
+  "login-admin": [
+    {
+      "username": "admin",
+      "password": "admin"
+    }
+  ],
+  "users": [
+    {
+      "id": "5c9676a997f01eb3d30e0516",
+      "name": "Patti Erickson",
+      "age": 22,
+      "date_init": "2019-01-23",
+      "date_end": "2019-09-01",
+      "role": "User",
+      "username": "erik",
+      "password": "123",
+      "phone": "01644646563",
+      "action": "True"
+    },
+    {
+      "name": "Randolph Rutledges",
+      "age": 21,
+      "date_init": "2019-02-01",
+      "date_end": "2019-09-21",
+      "role": "Staff",
+      "phone": "01644646563",
+      "action": "True",
+      "username": "huongtram17",
+      "password": "15",
+      "id": "5c9676a9f448181b63448971"
+    },
+    {
+      "id": "5c9676a997f01eb3d30e0516",
+      "name": "Patti Erickson",
+      "age": 22,
+      "date_init": "2019-01-23",
+      "date_end": "2019-09-01",
+      "role": "User",
+      "username": "erik",
+      "password": "123",
+      "phone": "01644646563",
+      "action": "True"
+    },
+    {
+      "name": "Randolph Rutledges",
+      "age": 21,
+      "date_init": "2019-02-01",
+      "date_end": "2019-09-21",
+      "role": "Staff",
+      "phone": "01644646563",
+      "action": "True",
+      "username": "huongtram17",
+      "password": "15",
+      "id": "5c9676a9f448181b63448971"
+    }
+  ]
 }
