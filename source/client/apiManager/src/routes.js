@@ -12,7 +12,7 @@ const routes = [
     },
     {
       path: "/login",
-      main: ({match}) => <LoginPage/>
+      main: ({match}) => <LoginPage match = {match}/>
     },
     {
       path: "/admin",

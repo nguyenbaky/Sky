@@ -1,7 +1,27 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
 class Menu extends Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          maccount :JSON.parse(localStorage.getItem('laccount')) || '',
+          mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
+          user: localStorage.getItem('user'),
+          logged_out: 'Sign Up',
+          llink: 'resgister'
+        };
+      }
+
+
     render(){
+        var name = 'login';
+        if(this.state.user !== null)
+        {
+            name = this.state.user;
+        }
+
+        
         return(
 
                 <div id="padding-sticky" className="header">
@@ -30,8 +50,8 @@ class Menu extends Component{
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
                         <div id="log-sig">
-                            <Link to ="/login"><span id="login"> Login</span></Link>
-                            <Link to = "/resgister"><span id="sign-up">Sign Up</span></Link>
+                            <Link to ={`/${name}`}><span id="login">{name}</span></Link>
+                            <Link to = "/adasdasdasd"><span id="sign-up">sadasdasdsa</span></Link>
                         </div>
                         
                     </div>

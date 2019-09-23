@@ -1,13 +1,90 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom";
+import list_account from "../Database/JsonDB"
+
+
+
 class LoginPage extends Component{
+    
+
+
+    constructor(props) {
+      super(props);
+      this.handlePassword = this.handlePassword.bind(this);
+      this.handleUsername = this.handleUsername.bind(this);
+      this.signIn = this.signIn.bind(this);
+      this.state = {
+        laccount :JSON.parse(localStorage.getItem('laccount')) || [],
+        lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
+        redirect: false
+      };
+    }
+
+
+   getInitialState() {
+      var selectedOption = localStorage.getItem( 'SelectedOption' ) || 1;
+  
+      return {
+          selectedOption: selectedOption
+      };
+    }
+  
+    setSelectedOption( option ) {
+          localStorage.setItem( 'SelectedOption', option );
+          this.setState( { selectedOption: option } );
+      }
+
+    handleUsername(e)
+    {
+      this.setState({laccount: e.target.value});
+    }
+
+    handlePassword(e)
+    {
+      this.setState({lpassword: e.target.value});
+    }
+
+    addProject = (newProject) => {
+      this.setState({
+        allProjects: this.state.allProjects.concat(newProject)
+      },() => {
+        localStorage.setItem('allProjects', JSON.stringify(this.state.allProjects))
+      });
+    }
+
+    signIn = () =>{
+      var check = '0';
+      Object.entries(list_account).map(([key,value],i) =>{
+        if(value.account === this.state.laccount && value.password === this.state.lpassword)
+        {
+          check = '1';
+        }
+      })
+      if(check === '0')
+        console.log("đăng nhập thất bại");
+      else
+        {
+          console.log("đăng nhập thành công");
+        
+        this.setState({
+          laccount: this.state.laccount,
+          redirect : true,
+          lpassword: this.state.lpassword
+        },() => {
+          localStorage.setItem('user', JSON.stringify(this.state.laccount
+          ))
+        });
+      }
+  }
+
+  RenderRedirect = ()=>{
+    if(this.state.redirect)
+      return <Redirect to = ''></Redirect>
+  }
+    
+
     render(){
         return(
-          // 
-          
-
-
-
           <div>
 
             <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>
@@ -33,7 +110,7 @@ class LoginPage extends Component{
                   </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Username is required">
-                  <input className="input100" type="text" name="username" />
+                  <input className="input100" type="text" name="username" id = 'account' onChange = {this.handleUsername}/>
                   <span className="focus-input100" />
                 </div>
                 <div className="p-t-13 p-b-9">
@@ -45,13 +122,15 @@ class LoginPage extends Component{
                   </a>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <input className="input100" type="password" name="pass" />
+                  <input className="input100" type="password" name="pass" id = 'password' onChange = {this.handlePassword}/>
                   <span className="focus-input100" />
                 </div>
-                <div className="container-login100-form-btn m-t-17">
-                  <button className="login100-form-btn">
+                <div className="container-login100-form-btn">
+                  {this.RenderRedirect()}
+                  <button type="button" className="login100-form-btn" onClick = {this.signIn}>
                     Sign In
                   </button>
+                  
                 </div>
                 <div className="w-full text-center p-t-28">
                   <span className="txt2">
