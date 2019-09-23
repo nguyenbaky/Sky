@@ -1,13 +1,36 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import MenuPage from './../../components/Menu/Menu'
+import Footer from  "./../../components/Footer/Footer"
 class HomePage extends Component{
+
+
+
     render(){
         return(
             <div>
-                            <div id="top-header" className="hello"><a href="google.com">HackerRank Projects now supports key data science skills. Identify and assess top data science candidates through project-based, real-world challenges.</a></div>    
+                <div id="top-header" className="hello">
+                    <div id = "contact-header">
+                        <span className = "green-color mr-r-50"><i className="fa fa-question-circle-o green-color icon-mr-r-10" aria-hidden="true"></i>Have a question?</span>
+                        <span className = "green-color mr-r-50"><i className="fa fa-phone green-color icon-mr-r-10" aria-hidden="true"></i>0344 656 534</span>
+                        <span className = "green-color mr-r-50"><i className="fa fa-envelope-o green-color icon-mr-r-10" aria-hidden="true"></i>sound@myapi.com</span>
+                    </div>
+
+                <div class="ml-auto">
+                    <div class="social-wrap">
+                    <a href="#"><span class="icon-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></span></a>
+                    <a href="#"><span class="icon-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></span></a>
+                    <a href="#"><span class="icon-linkedin"><i class="fa fa-instagram" aria-hidden="true"></i></span></a>
+
+                    <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
+                        class="icon-menu h3"></span></a>
+                </div>
+            </div>                
+
+                </div>   
+
                 <MenuPage/>
-                   <section id="showcase" className="showcase">
+                <section id="showcase" className="showcase">
                 <div className="container">
                     <h1>Affordable Professional Web Design</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu luctus ipsum, rhoncus semper magna. Nulla nec magna sit amet sem interdum condimentum.</p>
@@ -40,73 +63,7 @@ class HomePage extends Component{
                 </section>
 
 
-               <footer>
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-lg-4 col-md-6">
-                        <h3>Site Map</h3>
-                        <ul className="list-unstyled three-column">
-                            <li>Home</li>
-                            <li>Services</li>
-                            <li>About</li>
-                            <li>Code</li>
-                            <li>Design</li>
-                            <li>Host</li>
-                            <li>Contact</li>
-                            <li>Company</li>
-                        </ul>
-                        <ul className="list-unstyled socila-list">
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                            <li><img src="http://placehold.it/48x48" alt="" /></li>
-                        </ul>
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                        <h3>latest Articles</h3>
-                        <div className="media">
-                            <a href="#" className="pull-left">
-                            <img src="http://placehold.it/64x64" alt="" className="media-object" />
-                            </a>
-                            <div className="media-body">
-                            <h4 className="media-heading">Programming</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            </div>
-                        </div>
-                        <div className="media">
-                            <a href="#" className="pull-left">
-                            <img src="http://placehold.it/64x64" alt="" className="media-object" />
-                            </a>
-                            <div className="media-body">
-                            <h4 className="media-heading">Coding</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            </div>
-                        </div>
-                        <div className="media">
-                            <a href="#" className="pull-left">
-                            <img src="http://placehold.it/64x64" alt="" className="media-object" />
-                            </a>
-                            <div className="media-body">
-                            <h4 className="media-heading">Web Sesign</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-lg-4">
-                        <h3>Our Work</h3>
-                        <img className="img-thumbnail" src="http://placehold.it/150x100" alt="" />
-                        <img className="img-thumbnail" src="http://placehold.it/150x100" alt="" />
-                        <img className="img-thumbnail" src="http://placehold.it/150x100" alt="" />
-                        <img className="img-thumbnail" src="http://placehold.it/150x100" alt="" />
-                        </div>
-                    </div>
-                    </div>
-                    <div className="copyright text-center">
-                    Copyright © 2017 <span>Your Template Name</span>
-                    </div>
-                </footer>
+              <Footer></Footer>
             </div>
 
         )

@@ -11,15 +11,71 @@ body{
 
 #top-header{
     margin-bottom: 40px;
-
     background-color: #f2f7f7;
     text-align: left;
     padding: 14px 0 0 100px;
     overflow: auto;
+    height: 60px;
+
 }
 
+#contact-header{
+
+    position: absolute;
+    top:10;
+    left: auto;
+    cursor: pointer;
+    
+}
+.green-color{
+    color: #36b836;
+}
+
+.ml-auto{
+    grid-column: 7/10;
+    top:5px;
+    position: absolute;
+    right: 50px;
+}
+
+.fa-facebook,.fa-twitter,.fa-instagram{
+    font-size: 30px;
+}
+.social-wrap a {
+    display: inline-block;
+    width: 50px;
+    height: 45px;
+    background: #51be78;
+    position: relative; 
+}
+.social-wrap a > span {
+      position: absolute;
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); 
+}
+
+.social-wrap a:hover {
+      background: #9ba29d;
+      color: #51be78 !important;
+     
+}
+
+.social-wrap a{
+          margin-right: 4px;
+}
+.mr-r-50{
+    margin-right: 30px;
+}
+.icon-mr-r-10{
+    margin-right: 5px;
+}
 #top-header a{
-    color: #00b94f;
+    color: #439a43;
     font-size: 13px;
     text-decoration: none;
 }
@@ -488,7 +544,7 @@ nav ul{
     /* margin-top:116px; */
     margin-top:50px;
     min-height: 400px;
-    background: url('./../public/img/showcase.jpg')  no-repeat 0 00px;
+    background: url('./../public/loginStyle/img/showcase.jpg')  no-repeat 0 00px;
     text-align: center;
     color: #ffffff;
 }
@@ -543,3 +599,54 @@ nav ul{
 
 
 /* section acme */
+
+/* service */
+.row-center{
+    text-align: center;
+}
+figure{
+    position: relative;
+    background: #51be78;
+    padding: 0 0 10px  0;
+    width: 100%;
+}
+img{
+    padding : 0px;
+}
+.thumnail{
+    width: 100% !important;
+}
+.price{
+    position: absolute;
+    bottom:50px;
+    right: 0;
+    background: #183661;
+    color: white;
+    height: 50px;
+    width: 100px;
+    transform: translate(-0%);
+    padding: 10px 20px;
+    font-size: 20px;
+
+
+}
+.category h3{
+    color: white;
+    text-align: left;
+    padding-left: 10px;
+}
+.course-1-content{
+    font-size: 15px;
+}
+.course-1-content h2{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rounded-0{
+    background: #51be78;
+    border: none;
+    font-size: 16px;
+
+}
+

@@ -18,7 +18,7 @@ class Menu extends Component{
                             <ul>
                                 <li><a href="gl">Api Voice Into Words</a></li>
                                 <li><a href="gl">Api Word Into Voice</a></li>
-                                <li><a href="gl">Api English Into VietNamese</a></li>
+                                <li><Link to="/products">Api English Into VietNamese</Link></li>
                             </ul>
                             </li>
                             <li className="hov alway"><a href="google.com">Customers</a></li>
@@ -31,7 +31,7 @@ class Menu extends Component{
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
                         <div id="log-sig">
                             <Link to ="/login"><span id="login"> Login</span></Link>
-                            <span id="sign-up">Sign Up</span>
+                            <Link to = "/resgister"><span id="sign-up">Sign Up</span></Link>
                         </div>
                         
                     </div>

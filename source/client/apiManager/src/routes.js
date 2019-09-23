@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import HomePage from './pages/HomePage/HomePage'
 import AdminPage from "./pages/AdminPage/AdminPage";
 import SignUpPage from './pages/SignUpPage/SignUpPage'
+import Services from "./pages/Services/Services";
 const routes = [
     {
       path: "/",
@@ -20,7 +21,12 @@ const routes = [
     {
       path: "/resgister",
       main: ({match}) => <SignUpPage/>
+    },
+    {
+      path: "/products",
+      main: () => <Services/>
     }
+
 ]
   
 export default routes;

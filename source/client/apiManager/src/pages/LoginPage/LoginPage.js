@@ -10,10 +10,10 @@ class LoginPage extends Component{
 
           <div>
 
-            <link rel="stylesheet" type="text/css" href="./css/main.css"></link>
+            <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>
 
         <div className="limiter">
-          <div className="container-login100" style={{backgroundImage: 'url("images/bg-01.jpg")'}}>
+          <div className="container-login100" style={{backgroundImage: 'url("./loginStyle/images/bg-01.jpg")'}}>
             <div className="wrap-login100 p-l-110 p-r-110 p-t-37 p-b-33">
               <form className="login100-form validate-form flex-sb flex-w">
                 <span className="login100-form-title p-b-34">
@@ -24,7 +24,7 @@ class LoginPage extends Component{
                   Facebook
                 </a>
                 <a href="#" className="btn-google m-b-20">
-                  <img src="images/icons/icon-google.png" alt="GOOGLE" />
+                  <img src="loginStyle/images/icons/icon-google.png" alt="GOOGLE" />
                   Google
                 </a>
                 <div className="p-t-7 p-b-9">
