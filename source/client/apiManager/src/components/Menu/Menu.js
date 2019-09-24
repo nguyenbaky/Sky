@@ -1,5 +1,8 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import list_account from "../../pages/Database/JsonDB";
+import {Redirect} from "react-router-dom";
+
 class Menu extends Component{
 
     constructor(props) {
@@ -8,20 +11,45 @@ class Menu extends Component{
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
           user: localStorage.getItem('user'),
-          logged_out: 'Sign Up',
-          llink: 'resgister'
+          redirect: false
         };
       }
 
 
+    onClick_LogOutOrSignUp = ()=>{
+        localStorage.clear();
+        this.setState({
+            redirect: true
+        })
+        window.location.reload(false);
+    }
+
+
+    RenderRedirect = ()=>{
+        if(this.state.redirect)
+          {
+              return <Redirect to = '/'></Redirect>
+            }
+      }
+
     render(){
         var name = 'login';
-        if(this.state.user !== null)
+        var log_out = 'Sign Up';
+        var link = 'resgister';
+        var substring = ''
+        if(this.state.user!== null)
         {
-            name = this.state.user;
+            substring = this.state.user.slice(1,-1);
+            log_out = 'Log out';
+            link = '';
+            Object.entries(list_account).map(([key,value],i)=>{
+                if(value.account === substring)
+                {
+                    name = value.Name;
+                }
+            });
         }
 
-        
         return(
 
                 <div id="padding-sticky" className="header">
@@ -49,9 +77,10 @@ class Menu extends Component{
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
+                        {this.RenderRedirect()}
                         <div id="log-sig">
                             <Link to ={`/${name}`}><span id="login">{name}</span></Link>
-                            <Link to = "/adasdasdasd"><span id="sign-up">sadasdasdsa</span></Link>
+                            <Link to = {`/${link}`}><button id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</button></Link>
                         </div>
                         
                     </div>
