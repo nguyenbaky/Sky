@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import list_account from "../../pages/Database/JsonDB";
 import {Redirect} from "react-router-dom";
+import API from '../../pages/Database/APICnn';
+const api = new API();
 
 class Menu extends Component{
 
@@ -11,8 +13,18 @@ class Menu extends Component{
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
           user: localStorage.getItem('user'),
-          redirect: false
+          redirect: false,
+          data: []
         };
+      }
+
+      componentWillMount() {
+        api.getData().then(response => {
+          console.log('Data fetched', response)
+          this.setState({
+            data: response
+          })
+        })
       }
 
 
@@ -44,10 +56,10 @@ class Menu extends Component{
             substring = this.state.user.slice(1,-1);
             log_out = 'Log out';
             link = '';
-            Object.entries(list_account).map(([key,value],i)=>{
+            Object.entries(this.state.data).map(([key,value],i)=>{
                 if(value.account === substring)
                 {
-                    name = value.Name;
+                    name = value.name;
                 }
             });
         }

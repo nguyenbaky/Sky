@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import list_account from "../Database/JsonDB"
+import API from '../Database/APICnn';
+const api = new API();
+
 
 
 
@@ -16,8 +18,18 @@ class LoginPage extends Component{
       this.state = {
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
         lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
-        redirect: false
+        redirect: false,
+        data: []
       };
+    }
+
+    componentWillMount() {
+      api.getData().then(response => {
+        console.log('Data fetched', response)
+        this.setState({
+          data: response
+        })
+      })
     }
 
 
@@ -54,7 +66,7 @@ class LoginPage extends Component{
 
     signIn = () =>{
       var check = '0';
-      Object.entries(list_account).map(([key,value],i) =>{
+      Object.entries(this.state.data).map(([key,value],i) =>{
         if(value.account === this.state.laccount && value.password === this.state.lpassword)
         {
           check = '1';
