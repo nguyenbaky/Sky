@@ -29,7 +29,7 @@ class HomePage extends Component{
 
                 </div>   
 
-                <MenuPage/>
+                <MenuPage match = {this.props.match}/>
                 <section id="showcase" className="showcase">
                 <div className="container">
                     <h1>Affordable Professional Web Design</h1>

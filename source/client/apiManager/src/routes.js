@@ -8,7 +8,7 @@ const routes = [
     {
       path: "/",
       exact: true,
-      main: () => <HomePage />
+      main: ({match}) => <HomePage match = {match}/>
     },
     {
       path: "/login",
@@ -24,7 +24,7 @@ const routes = [
     },
     {
       path: "/products",
-      main: () => <Services/>
+      main: ({match}) => <Services match = {match}/>
     }
 
 ]

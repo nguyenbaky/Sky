@@ -79,7 +79,7 @@ class LoginPage extends Component{
 
   RenderRedirect = ()=>{
     if(this.state.redirect)
-      return <Redirect to = '/'></Redirect>
+      return <Redirect to = ''></Redirect>
   }
     
 

@@ -29,7 +29,7 @@ class Services extends Component{
             </div>                
 
                 </div>   
-                <MenuPage></MenuPage>
+                <MenuPage match = {this.props.match}></MenuPage>
     
             <div className="site-wrap">
        

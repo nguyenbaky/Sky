@@ -17,18 +17,19 @@ class Menu extends Component{
 
 
     onClick_LogOutOrSignUp = ()=>{
-        localStorage.clear();
+        if(this.state.user!==null)
+        {localStorage.clear();
         this.setState({
             redirect: true
         })
-        window.location.reload(false);
+        window.location.reload();}
     }
 
 
     RenderRedirect = ()=>{
         if(this.state.redirect)
           {
-              return <Redirect to = '/'></Redirect>
+              return <Redirect to = ''></Redirect>
             }
       }
 
@@ -36,7 +37,8 @@ class Menu extends Component{
         var name = 'login';
         var log_out = 'Sign Up';
         var link = 'resgister';
-        var substring = ''
+        var substring = '';
+        var { match } = this.props;
         if(this.state.user!== null)
         {
             substring = this.state.user.slice(1,-1);
@@ -77,10 +79,10 @@ class Menu extends Component{
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
-                        {this.RenderRedirect()}
+                        {this.RenderRedirect(match.url)}
                         <div id="log-sig">
                             <Link to ={`/${name}`}><span id="login">{name}</span></Link>
-                            <Link to = {`/${link}`}><button id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</button></Link>
+                            <Link to = {`/${link}`}><span id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</span></Link>
                         </div>
                         
                     </div>
