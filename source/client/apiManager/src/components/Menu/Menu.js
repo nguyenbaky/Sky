@@ -46,7 +46,7 @@ class Menu extends Component{
       }
 
     render(){
-        var name = 'login';
+        var name = 'Login';
         var log_out = 'Sign Up';
         var link = 'resgister';
         var substring = '';
@@ -83,11 +83,11 @@ class Menu extends Component{
                                 <li><Link to="/products">Api English Into VietNamese</Link></li>
                             </ul>
                             </li>
-                            <li className="hov alway"><a href="google.com">Customers</a></li>
-                            <li className="hov alway"><a href="google.com">Resources</a></li>
-                            <li className="alway"><a href="google.com">Research</a></li>
-                            <li className="alway"><a href="google.com">Blog</a></li>
-                            <li className="alway"><a href="google.com">About Us</a> </li>
+                            <li className="hov alway"><Link to = "/profile">Customers</Link></li>
+                            <li className="hov alway"><Link to = "/products">Resources</Link></li>
+                            <li className="alway"><Link to = "/contacts">Contact</Link></li>
+                            <li className="alway"><Link to = "/products">Blog</Link></li>
+                            <li className="alway"><Link to = "/about">About Us</Link> </li>
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>

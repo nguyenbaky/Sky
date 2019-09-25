@@ -650,3 +650,67 @@ img{
 
 }
 
+.form-control{
+    border-radius: 25px !important;
+}
+
+/* contacts */
+.ftco-subscribe-1:before {
+    position: absolute;
+    content: "";
+    background: #183661;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.mb-0{
+    z-index: 5;
+    position: absolute;
+    opacity: 1;
+    color: white;
+    top: 50px;
+}
+
+.col-lg-7 p{
+    z-index: 6;
+    position: absolute;
+    color: white;
+    top: 110px;
+}
+
+.site-section{
+    margin-top: 50px;
+}
+
+/* 3 hinh thoi index*/
+.feature-1{
+    width: 320px;
+    height: 250px;
+}
+.feature-1::before{
+    content: '';
+    position: absolute;
+    left: 100px;
+    top: -18px;
+    width: 130px;
+    border: 40px solid transparent;
+
+    border-top-color: #3ca060;
+}
+
+
+.feature-1-content{
+    text-align: center;
+    padding:15px;
+}
+.feature-1-content h2{
+    font-size: 20px;
+    font-weight: bold;
+}
+.feature-1-content p{
+    opacity: 0.8;
+    font-size: 20px;
+    line-height: 35px;
+}
