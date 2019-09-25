@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import list_account from "../../pages/Database/JsonDB";
 import {Redirect} from "react-router-dom";
 import API from '../../pages/Database/APICnn';
 const api = new API();
@@ -34,7 +33,8 @@ class Menu extends Component{
         this.setState({
             redirect: true
         })
-        window.location.reload();}
+        window.location.reload();
+    }
     }
 
 
@@ -50,7 +50,8 @@ class Menu extends Component{
         var log_out = 'Sign Up';
         var link = 'resgister';
         var substring = '';
-        var { match } = this.props;
+        
+       
         if(this.state.user!== null)
         {
             substring = this.state.user.slice(1,-1);
@@ -71,7 +72,7 @@ class Menu extends Component{
                         <Link to = "/">
                         <div id="branding" >
                             {/* <img alt = "Image" src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
-                            <h3><strong>SOU</strong>nd API</h3>
+                            <h3 style={{marginTop:"15px"}}><strong>SOU</strong>nd API</h3>
                         </div>
                         </Link>
                         <nav id = "togle">
@@ -91,7 +92,7 @@ class Menu extends Component{
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
-                        {this.RenderRedirect(match.url)}
+                        {this.RenderRedirect()}
                         <div id="log-sig">
                             <Link to ={`/${name}`}><span id="login">{name}</span></Link>
                             <Link to = {`/${link}`}><span id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</span></Link>

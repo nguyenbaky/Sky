@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
-import MenuPage from './../../components/Menu/Menu'
 import Footer from  "./../../components/Footer/Footer"
 class HomePage extends Component{
 
@@ -9,31 +8,6 @@ class HomePage extends Component{
     render(){
         return(
             <div>
-
-
-
-
-                <div id="top-header" className="hello">
-                    <div id = "contact-header">
-                        <span className = "green-color mr-r-50"><i className="fa fa-question-circle-o green-color icon-mr-r-10" aria-hidden="true"></i>Have a question?</span>
-                        <span className = "green-color mr-r-50"><i className="fa fa-phone green-color icon-mr-r-10" aria-hidden="true"></i>0344 656 534</span>
-                        <span className = "green-color mr-r-50"><i className="fa fa-envelope-o green-color icon-mr-r-10" aria-hidden="true"></i>sound@myapi.com</span>
-                    </div>
-
-                <div class="ml-auto">
-                    <div class="social-wrap">
-                    <a href="#"><span class="icon-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></span></a>
-                    <a href="#"><span class="icon-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></span></a>
-                    <a href="#"><span class="icon-linkedin"><i class="fa fa-instagram" aria-hidden="true"></i></span></a>
-
-                    <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
-                        class="icon-menu h3"></span></a>
-                </div>
-            </div>                
-
-                </div>   
-
-                <MenuPage match = {this.props.match}/>
                 <section id="showcase" className="showcase">
                 <div className="container">
                     <h1>Affordable Professional Web Design</h1>
@@ -79,9 +53,7 @@ class HomePage extends Component{
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 
                         <div class="feature-1 border">
-                        <div class="icon-wrapper bg-primary">
-                            <span class="flaticon-mortarboard text-white" style = {{}}></span>
-                        </div>
+                        
                         <div class="feature-1-content">
                             <h2>Api Voice Into Word</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
@@ -91,9 +63,7 @@ class HomePage extends Component{
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                         <div class="feature-1 border">
-                        <div class="icon-wrapper bg-primary">
-                            <span class="flaticon-school-material text-white"></span>
-                        </div>
+                       
                         <div class="feature-1-content">
                             <h2>Api Word Into Voice</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
@@ -103,9 +73,7 @@ class HomePage extends Component{
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                         <div class="feature-1 border">
-                        <div class="icon-wrapper bg-primary">
-                            <span class="flaticon-library text-white"></span>
-                        </div>
+                        
                         <div class="feature-1-content">
                             <h2>Api English Into Vietnamese</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>

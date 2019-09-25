@@ -7,9 +7,7 @@ const api = new API();
 
 
 class LoginPage extends Component{
-    
-
-
+  
     constructor(props) {
       super(props);
       this.handlePassword = this.handlePassword.bind(this);
@@ -17,7 +15,8 @@ class LoginPage extends Component{
       this.signIn = this.signIn.bind(this);
       this.state = {
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
-        lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
+        lpassword: JSON.parse(localStorage.getItem('lstate')) || [],
+
         redirect: false,
         data: []
       };
@@ -81,26 +80,29 @@ class LoginPage extends Component{
         this.setState({
           laccount: this.state.laccount,
           redirect : true,
-          lpassword: this.state.lpassword
+          lpassword: this.state.lpassword,
+          lstate: this.state.lstate,
         },() => {
           localStorage.setItem('user', JSON.stringify(this.state.laccount
           ))
         });
-      }
+        localStorage.setItem('state',JSON.stringify(this.state.lstate));
+        window.location.reload()
+        }
   }
 
-  RenderRedirect = ()=>{
-    if(this.state.redirect)
-      return <Redirect to = ''></Redirect>
-  }
+  
     
 
     render(){
+      if(localStorage.getItem('user'))
+      {
+        return <Redirect to = '/'></Redirect>
+      }
+      else{
         return(
           <div>
-
             <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>
-
         <div className="limiter">
           <div className="container-login100" style={{backgroundImage: 'url("./loginStyle/images/bg-01.jpg")'}}>
             <div className="wrap-login100 p-l-110 p-r-110 p-t-37 p-b-33">
@@ -138,7 +140,7 @@ class LoginPage extends Component{
                   <span className="focus-input100" />
                 </div>
                 <div className="container-login100-form-btn">
-                  {this.RenderRedirect()}
+                  
                   <button type="button" className="login100-form-btn" onClick = {this.signIn}>
                     Sign In
                   </button>
@@ -160,6 +162,7 @@ class LoginPage extends Component{
       </div>
         )
     }
+  }
 }
 
 

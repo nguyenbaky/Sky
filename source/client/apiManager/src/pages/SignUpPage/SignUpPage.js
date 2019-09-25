@@ -1,9 +1,108 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom";
+import API from '../Database/APICnn';
+const api = new API();
+
 class SignUpPage extends Component{
+
+  constructor(props) {
+    super(props);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handleUConfirmPassword = this.handleUConfirmPassword.bind(this);
+    this.SignUp = this.SignUp.bind(this);
+    this.state = {
+      laccount :JSON.parse(localStorage.getItem('laccount')) || null,
+      lpassword: JSON.parse(localStorage.getItem('lstate')) || null,
+      lrepassword: JSON.parse(localStorage.getItem('lstate')) || null,
+      redirect: false,
+      cheackusername: null,
+      dataget:[]
+    };
+  }
+
+  handleUsername(e)
+  {
+    this.setState({laccount: e.target.value});
+  }
+
+  handlePassword(e)
+  {
+    this.setState({lpassword: e.target.value});
+  }
+
+  handleUConfirmPassword(e)
+  {
+    this.setState({lrepassword: e.target.value});
+  }
+
+  componentWillMount()
+  {
+    api.getData().then(response => {
+      console.log('Data fetched', response)
+      this.setState({
+        dataget: response
+      })
+    })
+  }
+  
+  SignUp = ()=>
+  {
+    var check = false;
+    var {laccount,lpassword,lrepassword} = this.state;
+    Object.entries(this.state.dataget).map(([key,value],index)=>{
+      if(value.account === this.state.laccount)
+      {
+        check = true;
+        return;
+      }
+    })
+    if(check === true){
+      alert("tài khoản đã tồn tại");
+    }
+    else if(!laccount || !lpassword || !lrepassword) 
+    {
+      alert("Bạn chưa điền đầy đủ thông tin");
+    }
+    else if(lpassword!==lrepassword)
+    {
+      alert("Bạn nhập lại mật khẩu sai! vui lòng kiểm tra lại");
+    }
+    else
+    {
+      var datapost = [
+        {
+          account: laccount,
+          password: lpassword,
+          name: "Lê Hữu Lý",
+          avatar: "avatar n"
+        }
+      ]
+
+      this.setState({
+        redirect: true
+      })
+
+      alert("Đăng ký thành công! bạn sẽ được chuyển hướng sang trang đăng nhập");
+
+      Object.entries(datapost).map(([key,val],i)=>{
+        api.postData(val).then(response =>{
+          console.log(response);
+        })
+      })
+      
+    }
+  }
+
+  RedirectRender = ()=>{
+    if(this.state.redirect)
+    {
+      return <Redirect to = '/login'></Redirect>
+    }
+  }
+
     render(){
         return(
-          
           <div>
                 <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>
         <div className="limiter">
@@ -15,12 +114,12 @@ class SignUpPage extends Component{
                 </span>
                 
                 <div className="p-t-7 p-b-9">
-                  <span className="txt1">
+                  <span className="txt1" >
                     Username
                   </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Username is required">
-                  <input className="input100" type="text" name="username" />
+                  <input className="input100" type="text" name="username"   onChange = {this.handleUsername}/>
                   <span className="focus-input100" />
                 </div>
                 <div className="p-t-13 p-b-9">
@@ -31,7 +130,7 @@ class SignUpPage extends Component{
                 
                 
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <input className="input100" type="password" name="pass" />
+                  <input className="input100" type="password" name="pass"  onChange = {this.handlePassword}/>
                   <span className="focus-input100" />
                 </div>
 
@@ -41,12 +140,13 @@ class SignUpPage extends Component{
                   </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <input className="input100" type="password" name="pass" />
+                  <input className="input100" type="password" name="pass"  onChange = {this.handleUConfirmPassword}/>
                   <span className="focus-input100" />
                 </div>
 
                 <div className="container-login100-form-btn m-t-17">
-                  <button className="login100-form-btn">
+                  {this.RedirectRender()}
+                  <button className="login100-form-btn" onClick= {this.SignUp} type="button">
                     Sign Up
                   </button>
                 </div>
