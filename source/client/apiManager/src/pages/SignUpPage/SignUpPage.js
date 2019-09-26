@@ -15,7 +15,7 @@ class SignUpPage extends Component{
       laccount :JSON.parse(localStorage.getItem('laccount')) || null,
       lpassword: JSON.parse(localStorage.getItem('lstate')) || null,
       lrepassword: JSON.parse(localStorage.getItem('lstate')) || null,
-      redirect: false,
+      redirect:  JSON.parse(localStorage.getItem('redirect')) || false,
       cheackusername: null,
       dataget:[]
     };
@@ -80,9 +80,11 @@ class SignUpPage extends Component{
       ]
 
       this.setState({
-        redirect: true
-      })
-
+        redirect : true,
+      },() => {
+        localStorage.setItem('redirect', JSON.stringify(this.state.redirect
+        ))
+      });
       alert("Đăng ký thành công! bạn sẽ được chuyển hướng sang trang đăng nhập");
 
       Object.entries(datapost).map(([key,val],i)=>{
@@ -90,18 +92,19 @@ class SignUpPage extends Component{
           console.log(response);
         })
       })
-      
     }
   }
 
   RedirectRender = ()=>{
-    if(this.state.redirect)
-    {
-      return <Redirect to = '/login'></Redirect>
-    }
+    
   }
 
     render(){
+
+      if(this.state.redirect)
+      {
+        return <Redirect to = '/login'></Redirect>
+      }
         return(
           <div>
                 <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>

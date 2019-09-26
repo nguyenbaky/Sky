@@ -95,6 +95,13 @@ class LoginPage extends Component{
     
 
     render(){
+      var {redirect} = this.state;
+      redirect = localStorage.getItem('redirect');
+      if(redirect)
+      {
+        localStorage.removeItem('redirect');
+        window.location.reload()
+      }
       if(localStorage.getItem('user'))
       {
         return <Redirect to = '/'></Redirect>
