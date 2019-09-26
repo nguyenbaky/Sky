@@ -685,11 +685,11 @@ img{
 }
 
 /* 3 hinh thoi index*/
-.feature-1{
+.features-1{
     width: 320px;
     height: 250px;
 }
-.feature-1::before{
+.features-1::before{
     content: '';
     position: absolute;
     left: 100px;

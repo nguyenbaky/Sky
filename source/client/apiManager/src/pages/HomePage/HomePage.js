@@ -52,7 +52,7 @@ class HomePage extends Component{
                     <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 
-                        <div class="feature-1 border">
+                        <div class="features-1 feature-1 border">
                         
                         <div class="feature-1-content">
                             <h2>Api Voice Into Word</h2>
@@ -62,7 +62,7 @@ class HomePage extends Component{
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                        <div class="feature-1 border">
+                        <div class="features-1 feature-1 border">
                        
                         <div class="feature-1-content">
                             <h2>Api Word Into Voice</h2>
@@ -72,7 +72,7 @@ class HomePage extends Component{
                         </div> 
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                        <div class="feature-1 border">
+                        <div class="features-1 feature-1 border">
                         
                         <div class="feature-1-content">
                             <h2>Api English Into Vietnamese</h2>
