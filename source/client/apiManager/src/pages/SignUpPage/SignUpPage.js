@@ -78,33 +78,32 @@ class SignUpPage extends Component{
           avatar: "avatar n"
         }
       ]
-
-      this.setState({
-        redirect : true,
-      },() => {
-        localStorage.setItem('redirect', JSON.stringify(this.state.redirect
-        ))
-      });
-      alert("Đăng ký thành công! bạn sẽ được chuyển hướng sang trang đăng nhập");
-
       Object.entries(datapost).map(([key,val],i)=>{
         api.postData(val).then(response =>{
-          console.log(response);
+          alert("Đăng ký thành công! bạn sẽ được chuyển hướng sang trang đăng nhập");
+          this.setState({
+            redirect : true,
+          },() => {
+            localStorage.setItem('redirect', JSON.stringify(this.state.redirect
+            ))
+          });
         })
       })
+      
+     
+
     }
   }
 
   RedirectRender = ()=>{
-    
+    if(this.state.redirect)
+    {
+      return <Redirect to = '/login'></Redirect>
+    }
   }
-
     render(){
 
-      if(this.state.redirect)
-      {
-        return <Redirect to = '/login'></Redirect>
-      }
+   
         return(
           <div>
                 <link rel="stylesheet" type="text/css" href="./loginStyle/css/main.css"></link>

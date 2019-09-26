@@ -72,7 +72,7 @@ class LoginPage extends Component{
         }
       })
       if(check === '0')
-        console.log("đăng nhập thất bại");
+        alert("đăng nhập thất bại! tài khoản hoặc mật khẩu không chính xác");
       else
         {
           console.log("đăng nhập thành công");
@@ -99,8 +99,8 @@ class LoginPage extends Component{
       redirect = localStorage.getItem('redirect');
       if(redirect)
       {
-        localStorage.removeItem('redirect');
-        window.location.reload()
+        localStorage.clear();
+        window.location.reload();
       }
       if(localStorage.getItem('user'))
       {
