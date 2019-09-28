@@ -35,6 +35,43 @@ class API {
       })
   }
 
+  putData = (data) =>{
+    return axios({
+      method: 'put',
+      url : 'http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts',
+      data: data
+    })
+    .then(response =>{
+      resolve(response.data.data)
+    },response =>  {this.handleEditError(response)})
+    .catch(function(error) {
+      console.log(error)
+      return [] // Return empty array in case error response.
+    })
+  }
+
+  getDataWithAccountParams = (account) =>
+  {
+    return axios
+      .get('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts', {
+        params: {
+          account: account
+        }
+      })
+      .then(function(response) {
+        if (response.status === 200 && response != null) {
+          var data = response.data
+          return data
+        } else {
+          throw new Error('Empty data')
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+        return [] // Return empty array in case error response.
+      })
+  }
+
   postData = (data)=>{
     return axios
     .post('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts',
