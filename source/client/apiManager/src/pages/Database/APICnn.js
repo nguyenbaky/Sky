@@ -35,18 +35,17 @@ class API {
       })
   }
 
-  putData = (data) =>{
+  putData = (data, id) =>{
     return axios({
       method: 'put',
-      url : 'http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts',
+      url : `http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/${id}`,
       data: data
     })
-    .then(response =>{
-      resolve(response.data.data)
-    },response =>  {this.handleEditError(response)})
+    .then(function(response){
+      console.log('thành công rồi')
+    })
     .catch(function(error) {
       console.log(error)
-      return [] // Return empty array in case error response.
     })
   }
 
