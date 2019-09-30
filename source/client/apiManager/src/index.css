@@ -38,8 +38,11 @@ body{
     right: 50px;
 }
 
-.fa-facebook,.fa-twitter,.fa-instagram{
+.fa-facebook,.fa-twitter,.fa-instagram,.fa-menu{
     font-size: 30px;
+}
+.fa-menu{
+    margin-bottom: 40px;
 }
 .social-wrap a {
     display: inline-block;
@@ -276,14 +279,8 @@ body{
 }
 nav{
     margin-left:6%;
-    
+}
 
-}
-nav ul{
-    top:0px;
-    display: inline;
-    
-}
 #sticky-header nav ul li{
     list-style: none;
     padding:10px;
@@ -333,12 +330,12 @@ nav ul{
 
 #btn-sign{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(12,1fr);
     padding-top: 20px;
 }
 #btn-sign a{
     text-decoration: none;
-    grid-column: 3/4;
+    grid-column: 6/8;
 }
 .btns{
     padding: 14px;
@@ -392,14 +389,149 @@ nav ul{
     border-radius: 0 0 50% 50% ;
   }
 
+/* when click menu btn */
+  .sticky-header-block{
+    background: #179b81;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    width: 0%;
+    height: 100vh;
+    z-index: 10;
+    display: block;
+    transition: 0.4s ease-in-out;
 
-  /* media */
-  @media (max-width: 1110px){
-  nav{
+  }
+  .sticky-header-show{
+    background: white;
+    position: fixed;
+    top:0px;
+    right: 0;
+    width: 0;
+    height: 100vh;
+    z-index: 10;
+    transition: 0.4s ease-in-out;
+    display: block;
+
+  }
+  #btn-cancle-icon{
+      padding:15px;
+  }
+  .sticky-header-show-nobackground{
+    position: fixed!important;
+    top: 0!important;
+    left: 0!important;
+    width: 0vw!important;
+    height: 0vh!important;
+    background-image: none!important;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    
+  }
+  .sticky-header-show-background{
+    position: fixed!important;
+    top: 0!important;
+    left: 0!important;
+    width: 100vw!important;
+    height: 100vh!important;
+    background-image: none!important;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    
+  }
+  #togle-block{
+    overflow: hidden;
+    margin-left: 0px !important;
+  }
+  #togle-block ul{
+      list-style: none;
+      line-height: 50px;
+      text-align: center;
+      margin-top: 15px;
+      margin-left: -100px;
+
+  }
+  #togle-block ul li{
+    font-weight: bold;
+
+    background-color: white;
+    cursor: pointer;
+
+  }
+  #togle-block ul li ul{
+    border-bottom: 2px solid #36b836;
+  }
+  #togle-block ul li ul {
       display: none;
   }
-}
 
+  #togle-block ul li:hover{
+    background-color: #c4fec9;
+  }
+
+  .sticky-header-block nav ul li a{
+    color: white;
+
+  }
+/* btn cancle icon  */
+
+.fa-cancle-icon{
+    font-size: 30px;
+    cursor: pointer;
+}
+  /* btn menu */
+  #btn-menu-hidden{
+      height: 100px;
+      width: 100px;
+      background-color: white;
+      margin-left: 10px;
+      border: #2399a7 solid 1px;
+      border-radius: 2px;
+      padding: 8px 20px 8px 20px;
+      display: none;
+      
+  }
+  .fa-menu-hidden{
+      font-size: 20px;
+      color: #128289;
+  }
+  #btn-menu-hidden:hover{
+      background: #128289;
+  }
+  #btn-menu-hidden:hover .fa-menu-hidden{
+      color: white;
+  }
+
+  
+
+
+  /* media */
+
+  @media (max-width: 1135px){
+  #togle{
+      display: none;
+  }
+  .sticky-header-show{
+      width: 50%;
+      transition: 0.4s ease-in-out;
+  }
+
+  #padding-sticky::after{
+      display: none;
+  }
+  #btn-menu-hidden{
+    display: inline;
+  }
+}
+/* media top-header */
+@media (max-width: 800px){
+    #contact-header{
+        display: none;
+    }
+    #ml-auto #social-wrap{
+        text-align: center;
+    }
+}
 
 /* Login Page */
 
@@ -547,22 +679,36 @@ nav ul{
     background: url('./../public/loginStyle/img/showcase.jpg')  no-repeat 0 00px;
     text-align: center;
     color: #ffffff;
-}
+    visibility: hidden;
 
+    
+}
+.why-academics{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+
+}
+.why-academics .mb-5{
+    grid-column: 5/9;
+}
 
 #showcase h1{
     padding-top:50px;
     font-size: 55px;
+    visibility: hidden;
 
 }
 #showcase p {
     font-size: 17px;
+    visibility: hidden;
+
 
 }
 
 #newsletter{
     background-color: #35424a;
     padding: 15px;
+
 }
 
 #newsletter h1{
@@ -655,6 +801,9 @@ img{
 }
 
 /* contacts */
+.noIndex{
+    z-index: 0 !important;
+}
 .ftco-subscribe-1:before {
     position: absolute;
     content: "";
@@ -664,6 +813,7 @@ img{
     left: 0;
     right: 0;
     bottom: 0;
+
 }
 .mb-0{
     z-index: 5;
@@ -714,3 +864,73 @@ img{
     font-size: 20px;
     line-height: 35px;
 }
+
+/* slide about Page */
+
+
+.slidershow{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+  .middle{
+    position: absolute;
+    top: 400px; 
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .navigation{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+  .bar{
+    width: 50px;
+    height: 10px;
+    border: 2px solid #fff;
+    margin: 6px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  .bar:hover{
+    background: #fff;
+  }
+  
+  input[name="r"]{
+      position: absolute;
+      visibility: hidden;
+  }
+  
+  .slides{
+    width: 500%;
+    height: 100%;
+    display: flex;
+  }
+  
+  .slide{
+    width: 20%;
+    transition: 0.6s;
+  }
+  .slide img{
+    width: 100%;
+    height: 100%;
+  }
+  
+  #r1:checked ~ .s1{
+    margin-left: 0;
+  }
+  #r2:checked ~ .s1{
+    margin-left: -20%;
+  }
+  #r3:checked ~ .s1{
+    margin-left: -40%;
+  }
+  #r4:checked ~ .s1{
+    margin-left: -60%;
+  }
+  #r5:checked ~ .s1{
+    margin-left: -80%;
+  }
+  /*slide about page  */

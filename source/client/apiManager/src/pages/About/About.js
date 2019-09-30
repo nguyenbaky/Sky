@@ -2,7 +2,9 @@ import React, {Component} from "react";
 
 import Footer from "./../../components/Footer/Footer"
 
+import MenuPage from './../../components/Menu/Menu'
 
+import TopHeader from './../../components/TopHeader/TopHeader'
 class About extends Component{
 
     render(){
@@ -10,10 +12,8 @@ class About extends Component{
 
   
             <div>
-
-
-
-
+              <TopHeader/>
+              <MenuPage/>
             <div className="site-wrap">
            <div className="container pt-5 mb-5">
                 <div className="row">
@@ -82,6 +82,9 @@ class About extends Component{
                   </div>
                 </div>
               </div>
+
+
+
               <div className="site-section">
                 <div className="container">
                   <div className="row mb-5 justify-content-center text-center">
@@ -94,7 +97,7 @@ class About extends Component{
                   <div className="row">
                     <div className="col-lg-6 col-md-6 mb-5 mb-lg-5">
                       <div className="feature-1 border person text-center">
-                        <img src="./servicesStyle/images/person_1.jpg" alt="Image" className="img-fluid" />
+                        <img src="./servicesStyle/images/person_3.jpg" alt="Image" className="img-fluid" />
                         <div className="feature-1-content">
                           <h1 style = {{color : "#00ff00",fontSize: "30px", marginTop: "-35px"}}>Phuc Lam, Le</h1>
                           <span className="position mb-3 d-block">Products Owner</span>    
@@ -135,8 +138,6 @@ class About extends Component{
                   </div>
                 </div>
               </div>
-             
-              
               </div>
            
               <Footer/>
