@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import Footer from  "./../../components/Footer/Footer"
+import MenuPage from './../../components/Menu/Menu'
+
+import TopHeader from './../../components/TopHeader/TopHeader'
 class HomePage extends Component{
 
 
@@ -8,6 +11,42 @@ class HomePage extends Component{
     render(){
         return(
             <div>
+                    <TopHeader/>
+              <MenuPage/>
+
+
+              <div className="slidershow middle">
+        <div className="slides">
+          <input type="radio" name="r" id="r1" defaultChecked />
+          <input type="radio" name="r" id="r2" />
+          <input type="radio" name="r" id="r3" />
+          <input type="radio" name="r" id="r4" />
+          <input type="radio" name="r" id="r5" />
+          <div className="slide s1">
+            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./loginStyle/img/showcase.jpg" alt="" />
+          </div>
+          <div className="slide">
+            <img style = {{ position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/2.jpg" alt="" />
+          </div>
+          <div className="slide">
+            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/3.jpg" alt="" />
+          </div>
+          <div className="slide">
+            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/4.jpg" alt="" />
+          </div>
+          <div className="slide">
+            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/5.jpg" alt="" />
+          </div>
+        </div>
+        <div className="navigation">
+          <label htmlFor="r1" className="bar" />
+          <label htmlFor="r2" className="bar" />
+          <label htmlFor="r3" className="bar" />
+          <label htmlFor="r4" className="bar" />
+          <label htmlFor="r5" className="bar" />
+        </div>
+      </div>
+
                 <section id="showcase" className="showcase">
                 <div className="container">
                     <h1>Affordable Professional Web Design</h1>
@@ -41,14 +80,15 @@ class HomePage extends Component{
                 </section>
 
                 <div class="site-section">
-                <div class="container">
-                    <div class="row mb-5 justify-content-center text-center">
-                    <div class="col-lg-4 mb-5">
+
+                    <div class="justify-content-center text-center why-academics">
+                    <div class="mb-5 ">
                         <h2 class="section-title-underline mb-5">
                         <span>Why Academics Works</span>
                         </h2>
                     </div>
                     </div>
+                    <div className = "container">
                     <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 
@@ -82,7 +122,7 @@ class HomePage extends Component{
                         </div> 
                     </div>
                     </div>
-                </div>
+                    </div>
     </div>
 
 

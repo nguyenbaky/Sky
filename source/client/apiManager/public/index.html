@@ -45,14 +45,29 @@
   
   <script type="text/javascript">
     $(document).ready(function () {
-      $('.menu').click(function () {
-        $('#togle').toggleClass('active');
-        $('.nav').removeClass('nav').addClass('navs')
-        $('#res').toggleClass('res-1115');
-
+      $('#btn-menu-hidden').click(function () {
+        $('.sticky-header-block').removeClass('sticky-header-block').addClass('sticky-header-show')
+        $('.sticky-header-show-nobackground').removeClass('sticky-header-show-nobackground').addClass('sticky-header-show-background')
       })
     })
   </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.fa-cancle-icon').click(function () {
+        $('.sticky-header-show').removeClass('sticky-header-show').addClass('sticky-header-block')
+        $('.sticky-header-show-background').removeClass('sticky-header-show-background').addClass('sticky-header-show-nobackground')
+      })
+    })
+  </script>
+<!-- <script type="text/javascript">
+  $(document).ready(function () {
+    $('.spaceClickReturnWhiteColor').click(function () {
+      $('.sticky-header-show').removeClass('sticky-header-show').addClass('sticky-header-block')
+      $('.sticky-header-show-background').removeClass('sticky-header-show-background').addClass('sticky-header-show-nobackground')
+    })
+  })
+</script> -->
+
 
   <title>React App</title>
 </head>

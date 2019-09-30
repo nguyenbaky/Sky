@@ -66,7 +66,7 @@ class Menu extends Component{
         }
 
         return(
-
+                
                 <div id="padding-sticky" className="header">
                     <div id="sticky-header" >
                         <Link to = "/">
@@ -87,7 +87,6 @@ class Menu extends Component{
                             <li className="hov alway"><Link to = "/profile">Customers</Link></li>
                             <li className="hov alway"><Link to = "/products">Resources</Link></li>
                             <li className="alway"><Link to = "/contacts">Contact</Link></li>
-                            <li className="alway"><Link to = "/products">Blog</Link></li>
                             <li className="alway"><Link to = "/about">About Us</Link> </li>
                         </ul>
                         </nav>
@@ -96,12 +95,34 @@ class Menu extends Component{
                         <div id="log-sig">
                             <Link to ={`/${name}`}><span id="login">{name}</span></Link>
                             <Link to = {`/${link}`}><span id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</span></Link>
+                            
+                           
+                            <span id = "btn-menu-hidden"><i class="fa fa-bars fa-menu-hidden" aria-hidden="true"></i></span>
+                            <div className= "sticky-header-show-nobackground"></div>   
                         </div>
                         
                     </div>
 
-                    <div>
-                </div>
+                    <div className = "sticky-header-block" >
+                        <div>
+                            <nav id = "togle-block" >
+                                <div id = "btn-cancle-icon"><i class="fa fa-times fa-cancle-icon" aria-hidden="true"></i></div>
+                        <ul className = "spaceClickReturnWhiteColor">
+                            <li><a href="/products">Products</a>
+                            <ul>
+                                <li><a href="gl">Api Voice Into Words</a></li>
+                                <li><a href="gl">Api Word Into Voice</a></li>
+                                <li><Link to="/products">Api English Into VietNamese</Link></li>
+                            </ul>
+                            </li>
+                            <li ><Link to = "/profile">Customers</Link></li>
+                            <li ><Link to = "/products">Resources</Link></li>
+                            <li ><Link to = "/contacts">Contact</Link></li>
+                            <li ><Link to = "/about">About Us</Link> </li>
+                        </ul>
+                        </nav>
+                        </div>
+                    </div>
                 </div>
         )
     }

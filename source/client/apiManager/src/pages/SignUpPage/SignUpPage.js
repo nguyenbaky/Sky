@@ -96,6 +96,7 @@ class SignUpPage extends Component{
   }
 
   RedirectRender = ()=>{
+ 
     if(this.state.redirect)
     {
       return <Redirect to = '/login'></Redirect>
