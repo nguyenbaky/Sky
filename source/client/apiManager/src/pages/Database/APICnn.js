@@ -49,6 +49,23 @@ class API {
     })
   }
 
+  putDataWithParamAccount = (data, Account) =>{
+    return axios({
+      method: 'put',
+      url : `http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts`,
+      data: data,
+      params: {
+        account: 'account1'
+      }
+    })
+    .then(function(response){
+      console.log('thành công rồi')
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+  }
+
   getDataWithAccountParams = (account) =>
   {
     return axios
@@ -60,6 +77,8 @@ class API {
       .then(function(response) {
         if (response.status === 200 && response != null) {
           var data = response.data
+          console.log(response.data);
+          console.log("thanh cong roi")
           return data
         } else {
           throw new Error('Empty data')
@@ -82,7 +101,7 @@ class API {
     })
     .then(function(response){
       if (response.status === 201 && response != null) {
-       console.log('created')
+       console.log('created');
       } else {
         throw new Error('Empty data')
       }

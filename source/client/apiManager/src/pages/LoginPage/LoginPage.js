@@ -82,8 +82,9 @@ class LoginPage extends Component{
         email: "lehuuly1512313@gmail.com",
         phone: "0338314081"
       }
-      api.putData(data,id);
-    }
+
+      api.getDataWithAccountParams('account1');
+      }
 
     signIn = () =>{
       this.putdata();
