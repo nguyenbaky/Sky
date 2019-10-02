@@ -31,6 +31,7 @@ class ProfilePage extends Component{
     api.getData().then(response => {
       console.log('Data fetched', response)
       this.setState({
+        ...this.state,
         data: response
       })
       for(var i=0;i<this.state.data.length;i++)
@@ -39,6 +40,7 @@ class ProfilePage extends Component{
         {
           var name = this.state.data[i].name.split(" ")
           this.setState({
+            ...this.state,
             first_name: name.pop(),
             last_name: name.toString().split(",").join(" "),
             id: this.state.data[i].id
@@ -56,7 +58,15 @@ class ProfilePage extends Component{
     if(this.state.redirect)
       return <Redirect to = '/profile'></Redirect>
   }
-
+  reset = ()=>{
+    this.setState({
+      ...this.state,
+      first_name:"",
+      last_name:"",
+      laccount:"",
+      lpassword:""
+    })
+  }
     edit = () =>{
       axios.put(`http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/${this.state.id}`,{
         account: this.state.laccount,
@@ -164,7 +174,7 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="email" ><h4>Username</h4></label>
-                        <input type="text" className="form-control"  name="email" id="email" placeholder="you@email.com" title="enter your email." onChange={this.handleUsername}/>
+                        <input type="text" className="form-control"  name="email" id="email" placeholder="you@email.com" title="enter your email." onChange={this.handleUsername} value={this.state.laccount}/>
                       </div>
                     </div>
                     <div className="form-group">
@@ -176,7 +186,7 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="password" ><h4>Password</h4></label>
-                        <input type="password" className="form-control"   name="password" id="password" placeholder="password" title="enter your password." onChange={this.handlePassword}/>
+                        <input type="password" className="form-control"   name="password" id="password" placeholder="password" title="enter your password." onChange={this.handlePassword} value={this.state.lpassword}/>
                       </div>
                     </div>
                     <div className="form-group">
@@ -190,7 +200,7 @@ class ProfilePage extends Component{
                         <br />
                         {this.RenderRedirect}
                         <button className="btn btn-lg btn-success" onClick={this.edit}><i className="glyphicon glyphicon-ok-sign" /> Save</button>
-                        <button className="btn btn-lg" type="reset"><i className="glyphicon glyphicon-repeat" /> Reset</button>
+                        <button className="btn btn-lg" type="reset" onClick={this.reset}><i className="glyphicon glyphicon-repeat" /> Reset</button>
                       </div>
                     </div>
                   </div>
