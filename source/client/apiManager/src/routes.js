@@ -6,6 +6,7 @@ import SignUpPage from './pages/SignUpPage/SignUpPage'
 import Services from "./pages/Services/Services";
 import Contacts from "./pages/Contacts/Contacts"
 import About from "./pages/About/About"
+import ProfilePage from "./pages/ProfilePage/ProfilePage"
 const routes = [
     {
       path: "/",
@@ -35,8 +36,11 @@ const routes = [
     {
       path: "/About",
       main: ({match}) => <About match = {match}/>
+    },
+    {
+      path: "/profile",
+      main: ({match}) => <ProfilePage match = {match}/>
     }
-
 ]
   
 export default routes;

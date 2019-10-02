@@ -88,6 +88,7 @@ class Menu extends Component{
                             <li className="hov alway"><Link to = "/products">Resources</Link></li>
                             <li className="alway"><Link to = "/contacts">Contact</Link></li>
                             <li className="alway"><Link to = "/about">About Us</Link> </li>
+                            
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
