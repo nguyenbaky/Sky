@@ -4,6 +4,8 @@ import TopHeader from './../../components/TopHeader/TopHeader'
 import axios from 'axios'
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
+import API from '../Database/APICnn';
+const api = new API();
 
 class ProfilePage extends Component{
 
@@ -17,10 +19,38 @@ class ProfilePage extends Component{
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
+      account: JSON.parse(localStorage.getItem('user')) || [],
       first_name: "",
       last_name: "",
-      redirect: false
+      redirect: false,
+      data: [],
+      id: 0
     };
+  }
+  componentWillMount() {
+    api.getData().then(response => {
+      console.log('Data fetched', response)
+      this.setState({
+        data: response
+      })
+      for(var i=0;i<this.state.data.length;i++)
+      {
+        if(this.state.data[i].account === this.state.account)
+        {
+          var name = this.state.data[i].name.split(" ")
+          this.setState({
+            first_name: name.pop(),
+            last_name: name.toString().split(",").join(" "),
+            id: this.state.data[i].id
+          })
+          
+        }
+      }
+      console.log(this.state.first_name)
+      console.log(this.state.last_name)
+
+    })
+    
   }
   RenderRedirect = ()=>{
     if(this.state.redirect)
@@ -28,7 +58,7 @@ class ProfilePage extends Component{
   }
 
     edit = () =>{
-      axios.put('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/7',{
+      axios.put(`http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/${this.state.id}`,{
         account: this.state.laccount,
         password: this.state.lpassword,
         name: this.state.last_name + " " + this.state.first_name 
@@ -109,50 +139,50 @@ class ProfilePage extends Component{
                   <div className="form" id="registrationForm">
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="first_name" style={{margin:"5px"}}><h4>First name</h4></label>
-                        <input type="text" className="form-control" style={{height:"34px" ,margin:"5px"}} name="first_name" id="first_name" placeholder="first name" title="enter your first name if any." onChange={this.handleFirstname} />
+                        <label htmlFor="first_name" ><h4>First name</h4></label>
+                        <input type="text" className="form-control"  name="first_name" id="first_name"  value={this.state.first_name} title="enter your first name if any." onChange={this.handleFirstname} />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="last_name" style={{margin:"5px"}}><h4>Last name</h4></label>
-                        <input type="text" className="form-control"  style={{height:"34px" ,margin:"5px"}} name="last_name" id="last_name" placeholder="last name" title="enter your last name if any." onChange={this.handleLastname}/>
+                        <label htmlFor="last_name" ><h4>Last name</h4></label>
+                        <input type="text" className="form-control"   name="last_name" id="last_name" value={this.state.last_name} title="enter your last name if any." onChange={this.handleLastname}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="phone" style={{margin:"5px"}}><h4>Phone</h4></label>
-                        <input type="text" className="form-control" style={{height:"34px" ,margin:"5px"}} name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." />
+                        <label htmlFor="phone" ><h4>Phone</h4></label>
+                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="mobile" style={{margin:"5px"}}><h4>Card Number</h4></label>
-                        <input type="text" className="form-control" style={{height:"34px" ,margin:"5px"}} name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." />
+                        <label htmlFor="mobile" ><h4>Card Number</h4></label>
+                        <input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="email" style={{margin:"5px"}}><h4>Username</h4></label>
-                        <input type="text" className="form-control" style={{height:"34px" ,margin:"5px"}} name="email" id="email" placeholder="you@email.com" title="enter your email." onChange={this.handleUsername}/>
+                        <label htmlFor="email" ><h4>Username</h4></label>
+                        <input type="text" className="form-control"  name="email" id="email" placeholder="you@email.com" title="enter your email." onChange={this.handleUsername}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="email" style={{margin:"5px"}}><h4>Location</h4></label>
-                        <input type="email" className="form-control" style={{height:"34px" ,margin:"5px"}} id="location" placeholder="somewhere" title="enter a location" />
+                        <label htmlFor="email" ><h4>Location</h4></label>
+                        <input type="email" className="form-control"  id="location" placeholder="somewhere" title="enter a location" />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="password" style={{margin:"5px"}}><h4>Password</h4></label>
-                        <input type="password" className="form-control"  style={{height:"34px" ,margin:"5px"}} name="password" id="password" placeholder="password" title="enter your password." onChange={this.handlePassword}/>
+                        <label htmlFor="password" ><h4>Password</h4></label>
+                        <input type="password" className="form-control"   name="password" id="password" placeholder="password" title="enter your password." onChange={this.handlePassword}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="password2" style={{margin:"5px"}}><h4>Verify</h4></label>
-                        <input type="password" className="form-control" style={{height:"34px" ,margin:"5px"}} name="password2" id="password2" placeholder="password2" title="enter your password2." />
+                        <label htmlFor="password2" ><h4>Verify</h4></label>
+                        <input type="password" className="form-control"  name="password2" id="password2" placeholder="password2" title="enter your password2." />
                       </div>
                     </div>
                     <div className="form-group">

@@ -24,6 +24,7 @@ class Menu extends Component{
             data: response
           })
         })
+        
       }
 
 
