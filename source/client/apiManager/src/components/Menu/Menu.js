@@ -14,6 +14,7 @@ class Menu extends Component{
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
           user: localStorage.getItem('user'),
+          facebookuser: localStorage.getItem('FacebookUser'),
           redirect: false,
           data: []
         };
@@ -31,8 +32,9 @@ class Menu extends Component{
 
 
     onClick_LogOutOrSignUp = ()=>{
-        if(this.state.user!==null)
-        {localStorage.clear();
+        if(this.state.user || this.state.facebookuser)
+        {
+        localStorage.clear();
         this.setState({
             redirect: true
         })
@@ -56,9 +58,18 @@ class Menu extends Component{
         var iconsingup_logout = "fa fa-user-plus";
         var substring = '';
         var avatar = './servicesStyle/images/avatar.png';
-        
+
+        if(this.state.facebookuser)
+        {
+            log_out = 'Log out';
+            iconsingup_logout = "fa fa-sign-out";
+            link = '';
+            name = localStorage.getItem('FacebookName');
+            iconlogin_profile = "fa fa-facebook-official";
+            avatar = localStorage.getItem('FacebookPicture');
+        }
        
-        if(this.state.user!== null)
+        if(this.state.user)
         {
             substring = this.state.user.slice(1,-1);
             log_out = 'Log out';
