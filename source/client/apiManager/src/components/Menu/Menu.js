@@ -15,6 +15,7 @@ class Menu extends Component{
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
           user: localStorage.getItem('user'),
           facebookuser: localStorage.getItem('FacebookUser'),
+          googleuser: localStorage.getItem("GoogleUser"),
           redirect: false,
           data: []
         };
@@ -32,7 +33,7 @@ class Menu extends Component{
 
 
     onClick_LogOutOrSignUp = ()=>{
-        if(this.state.user || this.state.facebookuser)
+        if(this.state.user || this.state.facebookuser || this.state.googleuser)
         {
         localStorage.clear();
         this.setState({
@@ -67,6 +68,16 @@ class Menu extends Component{
             name = localStorage.getItem('FacebookName');
             iconlogin_profile = "fa fa-facebook-official";
             avatar = localStorage.getItem('FacebookPicture');
+        }
+
+        if(this.state.googleuser)
+        {
+            log_out = 'Log out';
+            iconsingup_logout = "fa fa-sign-out";
+            link = '';
+            name = localStorage.getItem('GoogleName');
+            iconlogin_profile = "fa fa-google";
+            avatar = localStorage.getItem('GooglePicture');
         }
        
         if(this.state.user)

@@ -15,7 +15,6 @@ class Facebook extends Component
       name: '',
       email: '',
       picture: '',
-      Redirect: false,
     }
   }
 

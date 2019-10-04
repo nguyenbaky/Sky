@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import API from '../Database/APICnn';
-import Facebook from './Facebook'
+import Facebook from './Facebook';
+import Google from './Google'
 const api = new API();
 
 
@@ -148,7 +149,7 @@ class LoginPage extends Component{
                 </a>
                 <a href="#" className="btn-google m-b-20">
                   <img src="loginStyle/images/icons/icon-google.png" alt="GOOGLE" />
-                  Google
+                  <Google></Google>
                 </a>
                 <div className="p-t-7 p-b-9">
                   <span className="txt1">
