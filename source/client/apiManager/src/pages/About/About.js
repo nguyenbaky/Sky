@@ -12,8 +12,6 @@ class About extends Component{
 
   
             <div>
-              <TopHeader/>
-              <MenuPage/>
             <div className="site-wrap">
            <div className="container pt-5 mb-5">
                 <div className="row">
@@ -139,8 +137,6 @@ class About extends Component{
                 </div>
               </div>
               </div>
-           
-              <Footer/>
           </div>
         )
     }

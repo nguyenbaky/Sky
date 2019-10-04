@@ -12,8 +12,6 @@ class Services extends Component{
 
        
             <div>
-     <TopHeader/>
-              <MenuPage/>
             <div className="site-wrap">
        
               <div className="site-section">
@@ -151,9 +149,6 @@ class Services extends Component{
              
           
             </div>
-            {/* .site-wrap */}
-            {/* loader */}
-            <Footer></Footer>
             </div>
 
         )

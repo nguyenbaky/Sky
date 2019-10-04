@@ -109,10 +109,6 @@ class ProfilePage extends Component{
     render(){
         return(
           <div>
-                <TopHeader/>
-                <MenuPage match = {this.props.match}/>
-
-
         <hr />
         <div className="container bootstrap snippet">
           <div className="row">
@@ -211,8 +207,6 @@ class ProfilePage extends Component{
         </div>{/*/row*/}
 
       </div>
-      
-            
                 </div>
                 </div>
         )

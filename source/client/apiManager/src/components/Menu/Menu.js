@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
 import API from '../../pages/Database/APICnn';
+import Avatar from 'react-avatar';
+import '../../App.css'
 const api = new API();
 
 class Menu extends Component{
@@ -50,18 +52,24 @@ class Menu extends Component{
         var name = 'Login';
         var log_out = 'Sign Up';
         var link = 'resgister';
+        var iconlogin_profile = "fa fa-sign-in";
+        var iconsingup_logout = "fa fa-user-plus";
         var substring = '';
+        var avatar = './servicesStyle/images/avatar.png';
         
        
         if(this.state.user!== null)
         {
             substring = this.state.user.slice(1,-1);
             log_out = 'Log out';
+            iconsingup_logout = "fa fa-sign-out";
             link = '';
             Object.entries(this.state.data).map(([key,value],i)=>{
                 if(value.account === substring)
                 {
                     name = value.name;
+                    iconlogin_profile = "fa fa-user";
+                    avatar = value.avatar;
                 }
             });
         }
@@ -94,15 +102,15 @@ class Menu extends Component{
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
                         {this.RenderRedirect()}
-                        <div id="log-sig">
-                            <Link to ={`/${name}`}><span id="login">{name}</span></Link>
-                            <Link to = {`/${link}`}><span id="sign-up" onClick = {this.onClick_LogOutOrSignUp}>{log_out}</span></Link>
-                            
-                           
-                            <span id = "btn-menu-hidden"><i class="fa fa-bars fa-menu-hidden" aria-hidden="true"></i></span>
+                        <div className = "dropdown">
+                            <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header"/>
+                                <div class="dropdown-content">
+                                    <Link to ={`/${name}`} className = "Link"><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
+                                    <Link to = {`/${link}`} className = "Link"><span onClick = {this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
+                                </div>
+                           </div>
+                            <span id = "btn-menu-hidden" ><i class="fa fa-bars fa-menu-hidden" aria-hidden="true"></i></span>
                             <div className= "sticky-header-show-nobackground"></div>   
-                        </div>
-                        
                     </div>
 
                     <div className = "sticky-header-block" >
