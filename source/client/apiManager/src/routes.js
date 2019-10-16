@@ -7,15 +7,22 @@ import Services from "./pages/Services/Services";
 import Contacts from "./pages/Contacts/Contacts"
 import About from "./pages/About/About"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
+import CreateKey from "./pages/CreateKey/CreateKey"
+import ReceiveKey from "./pages/CreateKey/ReceiveKey"
+
 const routes = [
+    {
+      path: "/homepage",
+      main: ({match}) => <CreateKey match = {match}/>
+    },
+    {
+      path: "/dashboard",
+      main: ({match,history}) => <HomePage match = {match} history = {history}/>
+    },
     {
       path: "/",
       exact: true,
-      main: ({match}) => <HomePage match = {match}/>
-    },
-    {
-      path: "/login",
-      main: ({match}) => <LoginPage match = {match}/>
+      main: ({match, history}) => <LoginPage match = {match} history = {history}/>
     },
     {
       path: "/admin",

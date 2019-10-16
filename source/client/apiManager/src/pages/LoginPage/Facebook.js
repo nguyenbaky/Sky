@@ -51,7 +51,7 @@ class Facebook extends Component
     }
     if(localStorage.getItem('FacebookUser'))
     {
-        return <Redirect to = '/'></Redirect>
+        return <Redirect to = '/homepage'></Redirect>
     }
     else
     {

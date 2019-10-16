@@ -37,9 +37,10 @@ class Menu extends Component{
         {
         localStorage.clear();
         this.setState({
-            redirect: true
+            redirect: true,
+            
         })
-        window.location.reload();
+        localStorage.setItem("logout", true);
     }
     }
 
@@ -47,7 +48,7 @@ class Menu extends Component{
     RenderRedirect = ()=>{
         if(this.state.redirect)
           {
-              return <Redirect to = ''></Redirect>
+              return <Redirect to = '/'></Redirect>
             }
       }
 
