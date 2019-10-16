@@ -46,14 +46,14 @@ class Google extends Component
             onSuccess={this.responseGoogle}
             onFailure={this.responseGoogle}
             cookiePolicy={'single_host_origin'}
-            className = "google"
+            className="google"
           />
           )
     }
 
     if(localStorage.getItem('GoogleUser'))
     {
-        return <Redirect to = '/homepage'></Redirect>
+        return <Redirect to='/homepage'></Redirect>
     }
     else
     {

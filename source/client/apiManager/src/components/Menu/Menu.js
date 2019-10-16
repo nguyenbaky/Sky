@@ -104,7 +104,7 @@ class Menu extends Component{
                         <Link to = "/">
                         <div id="branding" >
                             {/* <img alt = "Image" src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
-                            <h3 style={{marginTop:"15px"}}><strong>SOU</strong>nd API</h3>
+                            <h3 style={{marginTop:"15px"}}><strong>DASHBOARD</strong></h3>
                         </div>
                         </Link>
                         <nav id = "togle">

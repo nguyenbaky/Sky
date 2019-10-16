@@ -26,8 +26,8 @@ class KeyListItems extends Component {
                         <span className={`label label-${statusClass}`}>{statusName}</span>
                     </td>
                     <td>
-                        <button type="button" onClick = {() => this.onDelete(product.id)} className="btn btn-danger mr-10">DELL </button>
-                        <Link to ={`/product/${product.id}/edit`} className="btn btn-success">EDIT</Link>
+                        <button type="button" onClick={() => this.onDelete(product.id)} className="btn btn-danger mr-10">DELL </button>
+                        <Link to={`/product/${product.id}/edit`} className="btn btn-success">EDIT</Link>
                     </td>
                 </tr>
             
