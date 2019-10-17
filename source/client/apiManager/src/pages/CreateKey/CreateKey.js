@@ -11,6 +11,8 @@ class CreateKey extends Component{
     super(props);
     this.create = this.create.bind(this);
     this.dashboard = this.dashboard.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.check = this.check.bind(this);
     this.state = {
       maccount :JSON.parse(localStorage.getItem('laccount')) || '',
       mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -20,23 +22,38 @@ class CreateKey extends Component{
       data: [],
       key: "yourkey",
       copied: false,
-      name : ""
+      name : "",
+      select: "Free Trial",
+      check: false
     };
   }
 
   componentWillMount() {
+    if(localStorage.getItem("FacebookUser"))
+    {
+      this.setState({
+        ...this.state,
+        name: localStorage.getItem('FacebookName'),
+        email: localStorage.getItem('FacebookUser')
+      })
+    }
+    if(localStorage.getItem("GoogleUser"))
+    {
+      this.setState({
+        ...this.state,
+        name: localStorage.getItem('GoogleName'),
+        email: localStorage.getItem('GoogleUser')
+      })
+    }
+    if(localStorage.getItem("user"))
+    {
     api.getData().then(response => {
       console.log('Data fetched', response)
       this.setState({
         data: response
       })
 
-      api.getData().then(response => {
-        console.log('Data fetched', response)
-        this.setState({
-          ...this.state,
-          data: response
-        })
+     
         for(var i=0;i<this.state.data.length;i++)
         {
           
@@ -50,28 +67,50 @@ class CreateKey extends Component{
               lpassword:this.state.data[i].password,
               phone:this.state.data[i].phone,
               bank: this.state.data[i].numofbank,
-              name : this.state.last_name + " " +  this.state.first_name
-
+              name : this.state.last_name + " " +  this.state.first_name,
+              email: this.state.data[i].email
             })
-           
         }
-      })
     })
+  }
     
   if(this.state.user == null ){
   }
   }
 
 
+  handleSelect(e)
+  {
+      this.setState({select: e.target.value});
+  }
+
+  async check(e)
+  {
+    var ch = this.state.check;
+    var cb = !ch;
+    await this.setState({check: cb});
+    console.log(this.state.check);
+  }
 
 
-
-create = () =>{
+create = async () =>{
+  var userid = "";
+  if(await localStorage.getItem("id")){
+    userid = localStorage.getItem("id");
+  }
+  if(await localStorage.getItem("FacebookID"))
+  {
+    userid = localStorage.getItem("FacebookID")
+  }
+  if(await localStorage.getItem("GoogleID"))
+  {
+    userid = localStorage.getItem("GoogleID")
+  }
   var data = {
     method: "get-key",
     id: "0",
-    type: "free-trial",
-    user: "128s0209",
+    type: this.state.select,
+    user: userid,
     start: Date.now()
   }
 
@@ -80,6 +119,7 @@ create = () =>{
       key: response.data
     })  
   })
+
 }
 
 dashboard = ()=>{
@@ -89,7 +129,7 @@ dashboard = ()=>{
 
     render(){
         let name = this.state.name
-        let phone = this.state.phone
+        let email = this.state.email
         let card = this.state.bank
         if(localStorage.getItem("dashboard"))
         {
@@ -120,9 +160,7 @@ dashboard = ()=>{
           <div className="section"><span>1</span>Your Information </div>
           <div className="inner-wrap">
             <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value = {name} readOnly /></label>
-            <label  style={{color: "black"}}>Your Number <input type="text" name="field1" value = {phone} readOnly/></label>
-            <label  style={{color: "black"}}>Address <textarea name="field2" defaultValue={""} /></label>
-          </div>
+         </div>
           <div className="section"><span>2</span>Credit Card &amp; Paypal</div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Pay <input type="email" name="field3" value="Viet Nam" readOnly/></label>
@@ -130,14 +168,24 @@ dashboard = ()=>{
           </div>
           <div className="section"><span>3</span>Key will be send to your email &amp; phone number </div>
           <div className="inner-wrap">
-            <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value =""/></label>
+            <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email}/></label>
             <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" /></label>
+          </div>
+          <div className="section"><span>4</span>Pick package you want trial </div>
+          <div className="inner-wrap">
+          <select style = {{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
+                <option value="Free Trial">Free Trial</option>
+                <option value="1 Mounth">1 Mounth (0.25 $)</option>
+                <option value="3 Mounth">3 Mounth (0.5 $)</option>
+                <option value="6 Mounth">6 Mounth (1 $)</option> 
+                <option value="9 Mounth">9 Mounth (2 $)</option>
+                <option value="12 Mounth">12 Mounth (5 $)</option>
+                <option value="Unlimited">Unlimited</option> 
+          </select>
           </div>
           <div className="button-section">
             <input type="button" value = "Create" name="Sign Up"  class="btn btn-primary" onClick = {this.create} data-toggle="modal" href='#modal-id'/>
-            <span className="privacy-policy">
-              <input type="checkbox" name="field7" />You agree to our rules. 
-            </span>
+            
           </div>
         </form>
       </div>
@@ -163,7 +211,6 @@ dashboard = ()=>{
               </div>
             </div>
           </div>
-          
           </div>
         )
     }

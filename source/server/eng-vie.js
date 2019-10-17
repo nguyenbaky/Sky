@@ -14,6 +14,10 @@ router.get('/',(req,res)=>{
     res.json(mes);
 });
 
+router.get('/:eng',(req,res) =>{
+    
+})
+
 
 router.get('/:key/true/:eng',(req,res)=>{
             let key = req.params.key;

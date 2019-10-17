@@ -8,7 +8,7 @@ import Contacts from "./pages/Contacts/Contacts"
 import About from "./pages/About/About"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import CreateKey from "./pages/CreateKey/CreateKey"
-import ReceiveKey from "./pages/CreateKey/ReceiveKey"
+import Demo from "./pages/Demo/Demo"
 
 const routes = [
     {
@@ -23,6 +23,11 @@ const routes = [
       path: "/",
       exact: true,
       main: ({match, history}) => <LoginPage match = {match} history = {history}/>
+    },
+
+    {
+      path: "/demo",
+      main: ({match, history}) => <Demo match = {match} history = {history}/>
     },
     {
       path: "/admin",

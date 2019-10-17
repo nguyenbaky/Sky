@@ -17,16 +17,29 @@ class App extends Component {
         window.location.reload();
         localStorage.removeItem('state');
     }
+    var x = null;
+    var y = null;
+    if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser")) 
+    {
+      x = (
+        <div>
+          <TopHeader/>
+          <MenuPage/>
+        </div>
+      )
+      y=(
+        <Footer/>
+      )
+      }
     return (
         <Router>
-              <TopHeader/>
-              <MenuPage/>
+              {x}
           <div >
           <link rel="stylesheet" href="./servicesStyle/css/style.css"/>
          
             {this.showContentMenu(routes)}
           </div>
-          <Footer/>
+          {y}
         </Router>
     );
   }

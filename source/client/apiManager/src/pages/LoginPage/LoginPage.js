@@ -113,6 +113,7 @@ class LoginPage extends Component{
           ))
         });
         localStorage.setItem('state',JSON.stringify(this.state.lstate));
+        localStorage.setItem("logged", true);
         window.location.reload()
         }
   }

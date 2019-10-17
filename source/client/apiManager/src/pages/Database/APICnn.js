@@ -33,6 +33,7 @@ class API {
       })
   }
 
+
   getDataURL = (url) =>{
     return axios
       .get(url)
