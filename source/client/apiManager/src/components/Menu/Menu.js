@@ -99,11 +99,11 @@ class Menu extends Component{
 
         return(
                 
-                <div id="padding-sticky" className="header">
+                <div id="padding-sticky" className="header" style = {{display: `${this.props.display}`}}>
                     <div id="sticky-header" >
                         <Link to = "/">
                         <div id="branding" >
-                            {/* <img alt = "Image" src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
+                            {/* <img alt = "Image" src="https://www.hackerrthank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
                             <h3 style={{marginTop:"15px"}}><strong>DASHBOARD</strong></h3>
                         </div>
                         </Link>

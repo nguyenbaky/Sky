@@ -5,7 +5,7 @@ class Footer extends Component {
     render() {
 
         return (
-            <footer>
+            <footer style = {{display: `${this.props.display}`}}>
             <div className="container">
             <div className="row">
                 <div className="col-lg-4 col-md-6">

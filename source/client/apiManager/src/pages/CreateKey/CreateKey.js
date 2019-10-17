@@ -3,7 +3,7 @@ import API from './../../pages/Database/APICnn';
 import '../../App.css';
 import {Redirect} from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-
+import ReactDOM from "react-dom"
 const api = new API();
 class CreateKey extends Component{
 
@@ -28,7 +28,13 @@ class CreateKey extends Component{
     };
   }
 
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollLeft = 0;
+  }
+
   componentWillMount() {
+   
+   
     if(localStorage.getItem("FacebookUser"))
     {
       this.setState({

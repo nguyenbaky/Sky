@@ -5,7 +5,7 @@ class TopHeader extends Component {
     render() {
 
         return (
-            <div id="top-header" className="hello">
+            <div id="top-header" className="hello" style = {{display: `${this.props.display}`}}>
                     <div id = "contact-header">
                         <span className = "green-color mr-r-50"><i className="fa fa-question-circle-o green-color icon-mr-r-10" aria-hidden="true"></i>Have a question?</span>
                         <span className = "green-color mr-r-50"><i className="fa fa-phone green-color icon-mr-r-10" aria-hidden="true"></i>0344 656 534</span>

@@ -8,7 +8,9 @@ import TopHeader from './components/TopHeader/TopHeader'
 import Footer from "./components/Footer/Footer"
 
 
+
 class App extends Component {
+
 
   render() {
     var state = localStorage.getItem('state');
@@ -17,29 +19,24 @@ class App extends Component {
         window.location.reload();
         localStorage.removeItem('state');
     }
-    var x = null;
-    var y = null;
+    var display = "none";
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser")) 
     {
-      x = (
-        <div>
-          <TopHeader/>
-          <MenuPage/>
-        </div>
-      )
-      y=(
-        <Footer/>
-      )
-      }
+      display= 'block';
+    }
     return (
-        <Router>
-              {x}
+        <Router onUpdate={()=> {
+          window.scrollX = 0;
+          window.scrollY = 0;
+        }}>
+           <TopHeader display = {display} />
+            <MenuPage display = {display}/>
           <div >
-          <link rel="stylesheet" href="./servicesStyle/css/style.css"/>
+          <link  rel="stylesheet" href="./servicesStyle/css/style.css"/>
          
             {this.showContentMenu(routes)}
           </div>
-          {y}
+          <Footer display = {display}/>
         </Router>
     );
   }

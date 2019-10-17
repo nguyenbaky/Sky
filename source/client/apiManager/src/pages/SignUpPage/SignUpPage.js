@@ -99,7 +99,7 @@ class SignUpPage extends Component{
  
     if(this.state.redirect)
     {
-      return <Redirect to = '/login'></Redirect>
+      return <Redirect to = '/'></Redirect>
     }
   }
     render(){
