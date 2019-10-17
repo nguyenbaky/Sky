@@ -46,11 +46,7 @@ class Facebook extends Component
             <FacebookLogin
             appId="518873332229482"
             fields="name,email,picture"
-            render={renderProps => (
-              <button onClick={renderProps.onClick}>FACEBOOK LOGIN</button>
-            )}
-            callback={this.responseFacebook} 
-            />
+            callback={this.responseFacebook} />
           )
     }
     if(localStorage.getItem('FacebookUser'))

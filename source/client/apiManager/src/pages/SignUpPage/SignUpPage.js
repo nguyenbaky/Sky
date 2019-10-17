@@ -80,6 +80,7 @@ class SignUpPage extends Component{
       ]
       Object.entries(datapost).map(([key,val],i)=>{
         api.postData(val).then(response =>{
+          alert("Đăng ký thành công! bạn sẽ được chuyển hướng sang trang đăng nhập");
           this.setState({
             redirect : true,
           },() => {
@@ -98,7 +99,7 @@ class SignUpPage extends Component{
  
     if(this.state.redirect)
     {
-      return <Redirect to = '/'></Redirect>
+      return <Redirect to = '/login'></Redirect>
     }
   }
     render(){

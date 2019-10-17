@@ -150,6 +150,7 @@ class LoginPage extends Component{
                           </div>
                   </span>
                      <Facebook></Facebook>
+             
                     <Google></Google>
                   <div className="p-t-7 p-b-9">
                     <span className="txt1">
