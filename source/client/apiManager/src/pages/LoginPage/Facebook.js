@@ -46,7 +46,11 @@ class Facebook extends Component
             <FacebookLogin
             appId="518873332229482"
             fields="name,email,picture"
-            callback={this.responseFacebook} />
+            callback={this.responseFacebook} 
+            cssClass="fb"
+            textButton = ""
+            icon = "fa fa-facebook"
+            />
           )
     }
     if(localStorage.getItem('FacebookUser'))

@@ -113,6 +113,8 @@ class API {
       account : data.account,
       password: data.password,
       name: data.name,
+      email: data.email,
+      phone: data.phone,
       avatar: data.avatar
     })
     .then(function(response){

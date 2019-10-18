@@ -8,7 +8,9 @@ import Contacts from "./pages/Contacts/Contacts"
 import About from "./pages/About/About"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import CreateKey from "./pages/CreateKey/CreateKey"
-import Demo from "./pages/Demo/Demo"
+import Demo from "./pages/Demo/Demo";
+import NewSignUp from "./pages/SignUpPage/NewSignUp";
+import NewSignIn from "./pages/LoginPage/NewSignIn"
 
 const routes = [
     {
@@ -22,7 +24,7 @@ const routes = [
     {
       path: "/",
       exact: true,
-      main: ({match, history}) => <LoginPage match = {match} history = {history}/>
+      main: ({match, history}) => <NewSignIn match = {match} history = {history}/>
     },
 
     {
@@ -35,7 +37,7 @@ const routes = [
     },
     {
       path: "/resgister",
-      main: ({match}) => <SignUpPage/>
+      main: ({match}) => <NewSignUp/>
     },
     {
       path: "/products",

@@ -43,7 +43,7 @@ class Google extends Component
             <GoogleLogin
             clientId="1060295974592-82oh1am3c9s99qvd2s12rdkgvn437h05.apps.googleusercontent.com"
             render={renderProps => (
-              <button className="google" onClick={renderProps.onClick} disabled={renderProps.disabled}>LOGIN WITH GOOGLE</button>
+              <button className="gg" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src="./signupstyle/images/google.png"/></button>
             )}
             buttonText="Login With Gooogle"
             onSuccess={this.responseGoogle}
