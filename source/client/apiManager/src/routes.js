@@ -10,7 +10,8 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import CreateKey from "./pages/CreateKey/CreateKey"
 import Demo from "./pages/Demo/Demo";
 import NewSignUp from "./pages/SignUpPage/NewSignUp";
-import NewSignIn from "./pages/LoginPage/NewSignIn"
+import NewSignIn from "./pages/LoginPage/NewSignIn";
+
 
 const routes = [
     {

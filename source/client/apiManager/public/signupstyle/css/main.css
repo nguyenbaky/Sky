@@ -530,3 +530,21 @@ iframe {
 .gg:hover{
   background: black;
 }
+
+
+.btn-primary{
+  font-weight: bold;
+  -webkit-transition: background 1s;
+  background-color: #3b5998;
+  border-radius: 25px;
+}
+
+.btn-primary:hover{
+  background: black;
+}
+
+.btn-default{
+  font-weight: bold;
+  -webkit-transition: background 1s;
+  border-radius: 25px;
+}

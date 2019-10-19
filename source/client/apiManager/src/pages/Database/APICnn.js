@@ -128,6 +128,23 @@ class API {
       console.log(error);
     });
   }
+
+  SendMail = (data)=>{
+    return axios
+    .post("http://localhost:4000/send-mail",
+    {
+      code : data.code,
+      email: data.email
+    })
+    .then(res=>{
+      console.log(res.data);
+    })
+    .catch(function(err)
+    {
+      console.log(err);
+    })
+  }
 }
+
 
 export default API;
