@@ -109,8 +109,7 @@ class NewSignIn extends Component{
           lpassword: this.state.lpassword,
           lstate: this.state.lstate,
         },() => {
-          localStorage.setItem('user', JSON.stringify(this.state.laccount
-          ))
+          localStorage.setItem('user', this.state.laccount)
         });
         localStorage.setItem('state',JSON.stringify(this.state.lstate));
         localStorage.setItem("logged", true);

@@ -19,7 +19,7 @@ class ProfilePage extends Component{
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
-      account: JSON.parse(localStorage.getItem('user')) || [],
+      account: localStorage.getItem('user') || [],
       first_name: "",
       last_name: "",
       redirect: false,
@@ -29,33 +29,65 @@ class ProfilePage extends Component{
   }
   componentWillMount() {
     api.getData().then(response => {
-      console.log('Data fetched', response)
       this.setState({
         ...this.state,
         data: response
       })
-      for(var i=0;i<this.state.data.length;i++)
-      {
-        if(this.state.data[i].account === this.state.account)
+      this.state.data.map(value=>{
+        if(value.account === this.state.account)
         {
-          var name = this.state.data[i].name.split(" ")
+          var name = value.name.split(" ")
           this.setState({
             ...this.state,
             first_name: name.pop(),
             last_name: name.toString().split(",").join(" "),
-            id: this.state.data[i].id
+            id: value.id,
+            phone: value.phone,
+            email: value.email,
+            avatar: value.avatar
           })
-          
         }
-      }
-      console.log(this.state.first_name)
-      console.log(this.state.last_name)
-
+      })
     })
+
+    if(localStorage.getItem("FacebookID"))
+      {
+        var id = localStorage.getItem("FacebookID");
+        var name = localStorage.getItem("FacebookName");
+        var avatar = localStorage.getItem("FacebookPicture");
+        var email = localStorage.getItem("FacebookUser");
+        var names = name.split(" ");
+        this.setState({
+          ...this.state,
+          first_name: names.pop(),
+          last_name: names.toString().split(",").join(" "),
+          id,
+          phone: id,
+          email,
+          avatar
+        })
+      }
+      if(localStorage.getItem("GoogleID"))
+      {
+        var id = localStorage.getItem("GoogleID");
+        var name = localStorage.getItem("GoogleName");
+        var avatar = localStorage.getItem("GooglePicture");
+        var email = localStorage.getItem("GoogleUser");
+        var names = name.split(" ");
+        this.setState({
+          ...this.state,
+          first_name: names.pop(),
+          last_name: names.toString().split(",").join(" "),
+          id,
+          phone: id,
+          email,
+          avatar
+        })
+      }
     
   }
   RenderRedirect = ()=>{
-    if(this.state.redirect)
+    if(this.state.relodirect)
       return <Redirect to = '/profile'></Redirect>
   }
   reset = ()=>{
@@ -101,9 +133,23 @@ class ProfilePage extends Component{
     {
       this.setState({last_name: String(e.target.value)});
     }
+
+    
    
-    onChangeHandler = event =>{
-        console.log(event.target.files[0])
+    onChangeHandler = e =>{
+      var file = e.target.files[0]
+      console.log(file);
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.setState({
+          avatar: reader.result
+        })
+      };
+      
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      }
     }
 
     render(){
@@ -112,15 +158,15 @@ class ProfilePage extends Component{
         <hr />
         <div className="container bootstrap snippet">
           <div className="row">
-            <div className="col-sm-10"><h1>User name</h1></div>
+            
             {/* <div className="col-sm-2"><a href="/users" className="pull-right"><img title="profile image" className="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100" /></a></div> */}
           </div>
           <div className="row">
             <div className="col-sm-3">{/*left col*/}
               <div className="text-center">
-                <img src="./servicesStyle/images/person_1.jpg" className="avatar img-circle img-thumbnail" alt="avatar" />
+                <img src={this.state.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
                 <h6>Upload a different photo...</h6>
-                <input type="file" className="text-center center-block file-upload" onChange={this.onChangeHandler} />
+                <input type="file" className="text-center center-block file-upload" onChange={this.onChangeHandler} webkitRelativePath/>
               </div><br />
               <div className="panel panel-default">
                 <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
@@ -158,7 +204,7 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="phone" ><h4>Phone</h4></label>
-                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." />
+                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value = {this.state.phone}/>
                       </div>
                     </div>
                     <div className="form-group">
@@ -169,26 +215,16 @@ class ProfilePage extends Component{
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="email" ><h4>Username</h4></label>
-                        <input type="text" className="form-control"  name="email" id="email" placeholder="you@email.com" title="enter your email." onChange={this.handleUsername} value={this.state.laccount}/>
+                        <label htmlFor="account" ><h4>Username</h4></label>
+                        <input type="text" className="form-control"  name="email" id="email" onChange={this.handleUsername} value={this.state.account}/>
                       </div>
                     </div>
+                   
+                   
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="email" ><h4>Location</h4></label>
-                        <input type="email" className="form-control"  id="location" placeholder="somewhere" title="enter a location" />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <div className="col-xs-6">
-                        <label htmlFor="password" ><h4>Password</h4></label>
-                        <input type="password" className="form-control"   name="password" id="password" placeholder="password" title="enter your password." onChange={this.handlePassword} value={this.state.lpassword}/>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <div className="col-xs-6">
-                        <label htmlFor="password2" ><h4>Verify</h4></label>
-                        <input type="password" className="form-control"  name="password2" id="password2" placeholder="password2" title="enter your password2." />
+                        <label htmlFor="email" ><h4>email</h4></label>
+                        <input type="text" className="form-control"  name="email" id="email"  title="enter your password2." value={this.state.email}/>
                       </div>
                     </div>
                     <div className="form-group">

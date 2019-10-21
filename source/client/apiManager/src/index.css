@@ -141,7 +141,7 @@
     height: 4px;
     border-radius: 10px;
     width: 105%;
-    margin-top:8px;
+    margin-top:2px;
     background-color: white;
     display: block;
     transition: background 500ms ease-in;
@@ -151,6 +151,26 @@
     opacity: 1;
     background-color: #32c766;
 }
+
+
+#sticky-header nav ul li.actived
+{
+  background: white;
+}
+
+#sticky-header nav ul li.actived::after {
+
+  height: 4px;
+  border-radius: 10px;
+  width: 105%;
+  margin-top:2px;
+  
+  display: block;
+  opacity: 1;
+  background-color: #32c766;
+}
+
+
 
 
 /* start */

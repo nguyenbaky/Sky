@@ -33,8 +33,6 @@ class CreateKey extends Component{
   }
 
   componentWillMount() {
-   
-   
     if(localStorage.getItem("FacebookUser"))
     {
       this.setState({
@@ -54,29 +52,21 @@ class CreateKey extends Component{
     if(localStorage.getItem("user"))
     {
     api.getData().then(response => {
-      console.log('Data fetched', response)
       this.setState({
         data: response
       })
-
-     
-        for(var i=0;i<this.state.data.length;i++)
+      var user = localStorage.getItem("user");
+      this.state.data.map(value=>{
+        if(value.account === user)
         {
-          
-            var name = this.state.data[i].name.split(" ")
-            this.setState({
-              ...this.state,
-              first_name: name.pop(),
-              last_name: name.toString().split(",").join(" "),
-              id: this.state.data[i].id,
-              laccount:this.state.data[i].account,
-              lpassword:this.state.data[i].password,
-              phone:this.state.data[i].phone,
-              bank: this.state.data[i].numofbank,
-              name : this.state.last_name + " " +  this.state.first_name,
-              email: this.state.data[i].email
-            })
+          this.setState({
+            ...this.state,
+            name: value.name,
+            email: value.email,
+            phone: value.phone
+          })
         }
+      })
     })
   }
     
@@ -175,7 +165,7 @@ dashboard = ()=>{
           <div className="section"><span>3</span>Key will be send to your email &amp; phone number </div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email}/></label>
-            <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" /></label>
+            <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" value = {this.state.phone}/></label>
           </div>
           <div className="section"><span>4</span>Pick package you want trial </div>
           <div className="inner-wrap">

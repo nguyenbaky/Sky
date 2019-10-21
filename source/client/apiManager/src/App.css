@@ -129,3 +129,18 @@ footer .copyright span {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.hov-link {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.actived, .hov-link:hover {
+  background-color: #666;
+  color: white;
+}

@@ -137,7 +137,25 @@ class API {
       email: data.email
     })
     .then(res=>{
-      console.log(res.data);
+      return res.data
+    })
+    .catch(function(err)
+    {
+      console.log(err);
+    })
+  }
+
+
+  SendMailContacts = (data)=>{
+    return axios
+    .post("http://localhost:4000/send-mail-contacts",
+    {
+      email: data.email,
+      from: data.from,
+      content: data.content
+    })
+    .then(res=>{
+      return res.data;
     })
     .catch(function(err)
     {

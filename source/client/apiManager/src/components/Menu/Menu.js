@@ -10,6 +10,16 @@ class Menu extends Component{
 
     constructor(props) {
         super(props);
+        this.products = this.products.bind(this);
+        this.Create_Key = this.Create_Key.bind(this);
+        this.Resources = this.Resources.bind(this);
+        this.Contacts = this.Contacts.bind(this);
+        this.about = this.about.bind(this);
+        var about = window.location.pathname === "/about"? "alway actived":"alway";
+        var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
+        var Resources = window.location.pathname === "/products"? "alway actived":"alway";
+        var Create_Key = window.location.pathname === "/profile"? "alway actived":"alway";
+        var products = window.location.pathname === "/products"? "alway actived":"alway";
         this.state = {
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -17,7 +27,12 @@ class Menu extends Component{
           facebookuser: localStorage.getItem('FacebookUser'),
           googleuser: localStorage.getItem("GoogleUser"),
           redirect: false,
-          data: []
+          data: [],
+          products: "alway",
+          Create_Key,
+          Resources,
+          Contacts,
+          about
         };
       }
 
@@ -52,6 +67,56 @@ class Menu extends Component{
             }
       }
 
+    products = ()=>{
+        this.setState({
+            products: "alway actived",
+          Create_Key: "alway",
+          Resources: "alway",
+          Contacts: "alway",
+          about: "alway"
+        })
+    }
+    Create_Key = ()=>{
+        this.setState({
+            products: "alway",
+          Create_Key: "alway actived",
+          Resources: "alway",
+          Contacts: "alway",
+          about: "alway"
+        })
+    }
+
+    Resources = ()=>{
+        this.setState({
+            products: "alway",
+          Create_Key: "alway",
+          Resources: "alway actived",
+          Contacts: "alway",
+          about: "alway"
+        })
+    }
+
+    Contacts = ()=>{
+        this.setState({
+            products: "alway",
+          Create_Key: "alway",
+          Resources: "alway",
+          Contacts: "alway actived",
+          about: "alway"
+        })
+    }
+
+    about = ()=>{
+        this.setState({
+            products: "alway",
+          Create_Key: "alway",
+          Resources: "alway",
+          Contacts: "alway",
+          about: "alway actived"
+        })
+    }
+
+
     render(){
         var name = 'Login';
         var log_out = 'Sign Up';
@@ -83,7 +148,7 @@ class Menu extends Component{
        
         if(this.state.user)
         {
-            substring = this.state.user.slice(1,-1);
+            substring = this.state.user;
             log_out = 'Log out';
             iconsingup_logout = "fa fa-sign-out";
             link = '';
@@ -104,29 +169,29 @@ class Menu extends Component{
                         <Link to = "/">
                         <div id="branding" >
                             {/* <img alt = "Image" src="https://www.hackerrthank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
-                            <h3 style={{marginTop:"15px"}}><strong>DASHBOARD</strong></h3>
+                            <h2 style={{marginTop:"15px", color: "#3b5998", fontWeight: "bold"}}>Dashboard</h2>
                         </div>
                         </Link>
                         <nav id = "togle">
                         <ul id = "res">
-                            <li className="hov alway"><a href="google.com">Products</a>
+                            <li className={this.state.products} onClick={this.products}><a href="google.com">Products</a>
                             <ul>
                                 <li><a href="gl">Api Voice Into Words</a></li>
                                 <li><a href="gl">Api Word Into Voice</a></li>
                                 <li><Link to="/products">Api English Into VietNamese</Link></li>
                             </ul>
                             </li>
-                            <li className="hov alway"><Link to = "/profile">Customers</Link></li>
-                            <li className="hov alway"><Link to = "/products">Resources</Link></li>
-                            <li className="alway"><Link to = "/contacts">Contact</Link></li>
-                            <li className="alway"><Link to = "/about">About Us</Link> </li>
+                            <li className={this.state.Create_Key} onClick={this.Create_Key}><Link to = "/profile">Create key</Link></li>
+                            <li className={this.state.Resources} onClick={this.Resources}><Link to = "/products">Resources</Link></li>
+                            <li className={this.state.Contacts} onClick={this.Contacts}><Link to = "/contacts">Contact</Link></li>
+                            <li className={this.state.about} onClick={this.about}><Link to = "/about">About Us</Link> </li>
                             
                         </ul>
                         </nav>
                         <div className = "toggle"><i className="fa fa-bars menu"></i></div>
                         {this.RenderRedirect()}
                         <div className = "dropdown">
-                            <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header"/>
+                            <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header" style ={{marginTop: '5px'}}/>
                                 <div class="dropdown-content">
                                     <Link to ={`/${name}`} className = "Link"><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
                                     <Link to = {`/${link}`} className = "Link"><span onClick = {this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
@@ -136,26 +201,6 @@ class Menu extends Component{
                             <div className= "sticky-header-show-nobackground"></div>   
                     </div>
 
-                    <div className = "sticky-header-block" >
-                        <div>
-                            <nav id = "togle-block" >
-                                <div id = "btn-cancle-icon"><i class="fa fa-times fa-cancle-icon" aria-hidden="true"></i></div>
-                        <ul className = "spaceClickReturnWhiteColor">
-                            <li><a href="/products">Products</a>
-                            <ul>
-                                <li><a href="gl">Api Voice Into Words</a></li>
-                                <li><a href="gl">Api Word Into Voice</a></li>
-                                <li><Link to="/products">Api English Into VietNamese</Link></li>
-                            </ul>
-                            </li>
-                            <li ><Link to = "/profile">Customers</Link></li>
-                            <li ><Link to = "/products">Resources</Link></li>
-                            <li ><Link to = "/contacts">Contact</Link></li>
-                            <li ><Link to = "/about">About Us</Link> </li>
-                        </ul>
-                        </nav>
-                        </div>
-                    </div>
                 </div>
         )
     }
