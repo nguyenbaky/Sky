@@ -162,6 +162,17 @@ class API {
       console.log(err);
     })
   }
+
+  getKey = data=>{
+    return axios
+    .get(`http://localhost:4000/get-keys/${data.id}`)
+    .then(res=>{
+      return res.data;
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
 }
 
 

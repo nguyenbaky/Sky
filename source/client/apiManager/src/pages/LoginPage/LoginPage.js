@@ -18,7 +18,6 @@ class LoginPage extends Component{
       this.state = {
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
         lpassword: JSON.parse(localStorage.getItem('lstate')) || [],
-
         redirect: false,
         data: []
       };
@@ -91,10 +90,12 @@ class LoginPage extends Component{
     signIn = () =>{
       this.putdata();
       var check = '0';
+      var id = null;
       Object.entries(this.state.data).map(([key,value],i) =>{
         if(value.account === this.state.laccount && value.password === this.state.lpassword)
         {
           check = '1';
+        
         }
       })
       if(check === '0')
@@ -114,6 +115,7 @@ class LoginPage extends Component{
         });
         localStorage.setItem('state',JSON.stringify(this.state.lstate));
         localStorage.setItem("logged", true);
+        
         window.location.reload()
         }
   }

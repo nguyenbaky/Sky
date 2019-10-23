@@ -1,9 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
-import MenuPage from './../../components/Menu/Menu'
-import Footer from "../../components/Footer/Footer";
-
-import TopHeader from './../../components/TopHeader/TopHeader'
 class Services extends Component{
     render(){
         return(

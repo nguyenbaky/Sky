@@ -18,6 +18,7 @@ class NewSignUp extends Component{
     this.back = this.back.bind(this);
     this.confirm = this.confirm.bind(this);
     this.handleinput = this.handleinput.bind(this);
+    localStorage.removeItem("move");
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || null,
       lpassword: JSON.parse(localStorage.getItem('lstate')) || null,
@@ -28,7 +29,7 @@ class NewSignUp extends Component{
       select: "Email",
       redirect:  JSON.parse(localStorage.getItem('redirect')) || false,
       cheackusername: null,
-      dataget:[],
+      dataget:this.props.data,
       modal: false,
       code: this.randomkey(),
       recode: "",
@@ -84,15 +85,6 @@ class NewSignUp extends Component{
     return this.s4();
   }
 
-  componentWillMount()
-  {
-    api.getData().then(response => {
-      console.log('Data fetched', response)
-      this.setState({
-        dataget: response
-      })
-    })
-  }
   SignUp = ()=>
   {
     var check = false;
@@ -137,7 +129,7 @@ class NewSignUp extends Component{
     })
   }
 
-  confirm = ()=>{
+  confirm =  ()=>{
     var {code, recode} = this.state;
     if(code === recode)
     {
@@ -152,14 +144,13 @@ class NewSignUp extends Component{
           avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
         }
       ]
-      Object.entries(datapost).map(([key,val],i)=>{
-        api.postData(val).then(response =>{
-          this.setState({
-            redirect: true
-          })
-          localStorage.setItem('redirect', JSON.stringify(this.state.redirect))
+       Object.entries(datapost).map( async ([key,val],i)=>{
+       await api.postData(val).then( response =>{
+          localStorage.setItem("move", true)
         })
+        window.location.reload()
       }) 
+      
     }
     else
     {
@@ -167,15 +158,8 @@ class NewSignUp extends Component{
     }
   }
 
-  RedirectRender = ()=>{
- 
-    if(this.state.redirect)
-    {
-      return <Redirect to = '/'></Redirect>
-    }
-  }
-
   RenderModal = ()=>{
+  
     if(this.state.modal)
     {
       const backdropStyle = {
@@ -206,7 +190,7 @@ class NewSignUp extends Component{
                 textAlign: "center",
                 paddingBottom : "50px"
                 }}>
-                  {this.RedirectRender()}
+                  {/* {this.RedirectRender()} */}
                 <div class="col-sm-6"> <button type="button" class="btn btn-default" style = {{width :"80%", marginTop: "10px"}} onClick = {this.back}>Back</button></div>
                 <div class="col-sm-6"><button type="button" class="btn btn-primary" style = {{width :"80%", marginTop: "10px"}} onClick = {this.confirm}>Confirm</button></div>
               </div>
@@ -220,6 +204,10 @@ class NewSignUp extends Component{
 
 
     render(){
+        if(localStorage.getItem("move"))
+        {
+        return <Redirect to = '/'></Redirect>
+        }
         if(this.state.modal)
         {
           return<div>{this.RenderModal()}</div>

@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import MenuPage from './../../components/Menu/Menu'
-import TopHeader from './../../components/TopHeader/TopHeader'
 import axios from 'axios'
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
@@ -23,16 +21,11 @@ class ProfilePage extends Component{
       first_name: "",
       last_name: "",
       redirect: false,
-      data: [],
+      data: this.props.data,
       id: 0
     };
   }
   componentWillMount() {
-    api.getData().then(response => {
-      this.setState({
-        ...this.state,
-        data: response
-      })
       this.state.data.map(value=>{
         if(value.account === this.state.account)
         {
@@ -48,7 +41,6 @@ class ProfilePage extends Component{
           })
         }
       })
-    })
 
     if(localStorage.getItem("FacebookID"))
       {

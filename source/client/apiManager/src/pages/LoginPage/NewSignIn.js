@@ -18,83 +18,31 @@ class NewSignIn extends Component{
       this.state = {
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
         lpassword: JSON.parse(localStorage.getItem('lstate')) || [],
-
         redirect: false,
-        data: []
+        data: this.props.data
       };
     }
-
-    componentWillMount() {
-      api.getData().then(response => {
-        console.log('Data fetched', response)
-        this.setState({
-          data: response
-        })
-      })
-    }
-
-
-   getInitialState() {
-      var selectedOption = localStorage.getItem( 'SelectedOption' ) || 1;
-  
-      return {
-          selectedOption: selectedOption
-      };
-    }
-  
-    setSelectedOption( option ) {
-          localStorage.setItem( 'SelectedOption', option );
-          this.setState( { selectedOption: option } );
-      }
 
     handleUsername(e)
     {
+      e.preventDefault();
       this.setState({laccount: e.target.value});
     }
 
     handlePassword(e)
     {
+      e.preventDefault();
       this.setState({lpassword: e.target.value});
     }
 
-    addProject = (newProject) => {
-      this.setState({
-        allProjects: this.state.allProjects.concat(newProject)
-      },() => {
-        localStorage.setItem('allProjects', JSON.stringify(this.state.allProjects))
-      });
-    }
-
-
-
-
-    putdata = () =>{
-      // m tìm kiếm ID muốn replace trong this.state.data tìm bằng user nghe, cái user t đang lưu trong localstorage,
-      // m get rồi tìm kiếm id là đc.
-       // rồi truyền ID vào hàm push data
-      // t bỏ hàm này trong SignIn khi m ấn btn sign nó sẽ replace
-      // ví dụ ID = 1;
-      var id = 1;
-      // nhấn sign in xong kiểm tra console log in ra thành công rồi là ok 
-      var data = {
-        name: "Lê Hữu Lý",
-        avatar: "avatar 1",
-        birthday: 1569683675,
-        numofbank: "0917644229",
-        email: "lehuuly1512313@gmail.com",
-        phone: "0338314081"
-      }
-
-      api.getDataWithAccountParams('account1');
-      }
-
     signIn = () =>{
-      this.putdata();
       var check = '0';
+      var id = null;
       Object.entries(this.state.data).map(([key,value],i) =>{
         if(value.account === this.state.laccount && value.password === this.state.lpassword)
         {
           check = '1';
+          id = value.id;
         }
       })
       if(check === '0')
@@ -108,12 +56,13 @@ class NewSignIn extends Component{
           redirect : true,
           lpassword: this.state.lpassword,
           lstate: this.state.lstate,
+          rec:true
         },() => {
           localStorage.setItem('user', this.state.laccount)
         });
-        localStorage.setItem('state',JSON.stringify(this.state.lstate));
         localStorage.setItem("logged", true);
-        window.location.reload()
+        localStorage.setItem("ID", id);
+        window.location.reload();
         }
   }
 
@@ -121,17 +70,16 @@ class NewSignIn extends Component{
     
 
     render(){
-      var {redirect} = this.state;
-      redirect = localStorage.getItem('redirect');
       var logout = localStorage.getItem('logout');
-      if(redirect || logout)
+     
+      if(logout)
       {
         localStorage.clear();
         window.location.reload();
       }
       if(localStorage.getItem('user'))
       {
-        return <Redirect to = '/homepage'></Redirect>
+        return <Redirect to = '/dashboard'></Redirect>
       }
       else{
         return(

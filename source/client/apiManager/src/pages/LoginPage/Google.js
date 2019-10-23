@@ -56,7 +56,7 @@ class Google extends Component
 
     if(localStorage.getItem('GoogleUser'))
     {
-        return <Redirect to='/homepage'></Redirect>
+        return <Redirect to='/dashboard'></Redirect>
     }
     else
     {

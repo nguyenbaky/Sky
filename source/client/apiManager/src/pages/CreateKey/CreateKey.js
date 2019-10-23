@@ -19,7 +19,7 @@ class CreateKey extends Component{
       user: localStorage.getItem('user'),
       facebookuser: localStorage.getItem('FacebookUser'),
       googleuser: localStorage.getItem("GoogleUser"),
-      data: [],
+      data: this.props.data,
       key: "yourkey",
       copied: false,
       name : "",
@@ -51,10 +51,6 @@ class CreateKey extends Component{
     }
     if(localStorage.getItem("user"))
     {
-    api.getData().then(response => {
-      this.setState({
-        data: response
-      })
       var user = localStorage.getItem("user");
       this.state.data.map(value=>{
         if(value.account === user)
@@ -67,10 +63,6 @@ class CreateKey extends Component{
           })
         }
       })
-    })
-  }
-    
-  if(this.state.user == null ){
   }
   }
 
@@ -91,8 +83,8 @@ class CreateKey extends Component{
 
 create = async () =>{
   var userid = "";
-  if(await localStorage.getItem("id")){
-    userid = localStorage.getItem("id");
+  if(await localStorage.getItem("ID")){
+    userid = localStorage.getItem("ID");
   }
   if(await localStorage.getItem("FacebookID"))
   {

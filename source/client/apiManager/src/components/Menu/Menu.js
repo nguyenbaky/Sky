@@ -10,16 +10,12 @@ class Menu extends Component{
 
     constructor(props) {
         super(props);
-        this.products = this.products.bind(this);
-        this.Create_Key = this.Create_Key.bind(this);
-        this.Resources = this.Resources.bind(this);
-        this.Contacts = this.Contacts.bind(this);
-        this.about = this.about.bind(this);
         var about = window.location.pathname === "/about"? "alway actived":"alway";
         var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
         var Resources = window.location.pathname === "/products"? "alway actived":"alway";
-        var Create_Key = window.location.pathname === "/profile"? "alway actived":"alway";
-        var products = window.location.pathname === "/products"? "alway actived":"alway";
+        var Create_Key = window.location.pathname === "/create-key"? "alway actived":"alway";
+        var products = window.location.pathname === "/introduce"? "alway actived":"alway";
+        var docs = window.location.pathname === "/docs"? "alway actived":"alway";
         this.state = {
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -27,26 +23,16 @@ class Menu extends Component{
           facebookuser: localStorage.getItem('FacebookUser'),
           googleuser: localStorage.getItem("GoogleUser"),
           redirect: false,
-          data: [],
-          products: "alway",
+          data: this.props.data,
+          products,
           Create_Key,
           Resources,
           Contacts,
-          about
+          about,
+          docs
         };
       }
-
-      componentWillMount() {
-        api.getData().then(response => {
-          console.log('Data fetched', response)
-          this.setState({
-            data: response
-          })
-        })
-        
-      }
-
-
+      
     onClick_LogOutOrSignUp = ()=>{
         if(this.state.user || this.state.facebookuser || this.state.googleuser)
         {
@@ -73,7 +59,8 @@ class Menu extends Component{
           Create_Key: "alway",
           Resources: "alway",
           Contacts: "alway",
-          about: "alway"
+          about: "alway",
+          docs: "alway"
         })
     }
     Create_Key = ()=>{
@@ -82,7 +69,8 @@ class Menu extends Component{
           Create_Key: "alway actived",
           Resources: "alway",
           Contacts: "alway",
-          about: "alway"
+          about: "alway",
+          docs: "alway"
         })
     }
 
@@ -92,7 +80,8 @@ class Menu extends Component{
           Create_Key: "alway",
           Resources: "alway actived",
           Contacts: "alway",
-          about: "alway"
+          about: "alway",
+          docs: "alway"
         })
     }
 
@@ -102,7 +91,8 @@ class Menu extends Component{
           Create_Key: "alway",
           Resources: "alway",
           Contacts: "alway actived",
-          about: "alway"
+          about: "alway",
+          docs: "alway"
         })
     }
 
@@ -112,7 +102,31 @@ class Menu extends Component{
           Create_Key: "alway",
           Resources: "alway",
           Contacts: "alway",
-          about: "alway actived"
+          about: "alway actived",
+          docs: "alway"
+        })
+    }
+
+    docs = ()=>
+    {
+        this.setState({
+            products: "alway",
+          Create_Key: "alway",
+          Resources: "alway",
+          Contacts: "alway",
+          about: "alway",
+          docs: "alway  actived"
+        })
+    }
+
+    Dashboard = ()=>{
+        this.setState({
+            products: "alway",
+          Create_Key: "alway",
+          Resources: "alway",
+          Contacts: "alway",
+          about: "alway",
+          docs: "alway"
         })
     }
 
@@ -169,22 +183,25 @@ class Menu extends Component{
                         <Link to = "/">
                         <div id="branding" >
                             {/* <img alt = "Image" src="https://www.hackerrthank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
-                            <h2 style={{marginTop:"15px", color: "#3b5998", fontWeight: "bold"}}>Dashboard</h2>
+                            <h2 style={{marginTop:"15px", color: "#3b5998", fontWeight: "bold"}} onClick = {this.Dashboard}>Dashboard</h2>
                         </div>
                         </Link>
                         <nav id = "togle">
                         <ul id = "res">
-                            <li className={this.state.products} onClick={this.products}><a href="google.com">Products</a>
+                            <li className={this.state.products} onClick={this.products}><Link to = "/introduce">Introduce</Link>
+                
+                            </li>
+                            <li className={this.state.Resources} onClick={this.Resources}><Link to = "/products">Package</Link></li>
+                            <li className={this.state.Create_Key} onClick={this.Create_Key}><Link to = "/create-key">Create key</Link></li>
+                            <li className={this.state.docs} onClick={this.docs}><Link to = "/docs">Docs</Link> 
                             <ul>
-                                <li><a href="gl">Api Voice Into Words</a></li>
-                                <li><a href="gl">Api Word Into Voice</a></li>
-                                <li><Link to="/products">Api English Into VietNamese</Link></li>
+                                <li><a href="gl">Software Development Kit (SDK)</a></li>
+                                <li><a href="gl">Learn more</a></li>
                             </ul>
                             </li>
-                            <li className={this.state.Create_Key} onClick={this.Create_Key}><Link to = "/profile">Create key</Link></li>
-                            <li className={this.state.Resources} onClick={this.Resources}><Link to = "/products">Resources</Link></li>
                             <li className={this.state.Contacts} onClick={this.Contacts}><Link to = "/contacts">Contact</Link></li>
                             <li className={this.state.about} onClick={this.about}><Link to = "/about">About Us</Link> </li>
+                            
                             
                         </ul>
                         </nav>

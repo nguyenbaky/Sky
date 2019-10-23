@@ -22,8 +22,9 @@ class Loading extends Component {
     api.getData().then(response => {
       console.log('Data fetched', response)
       this.setState({
-            isLoading: true,
-            data: response
+           
+            data: response,
+            isLoading: true
       })
     })
     
@@ -40,7 +41,7 @@ class Loading extends Component {
       else
       {
           return(
-            <div style = {{textAlign: "center", marginTop: "200px"}}>
+            <div style = {{textAlign: "center", marginTop: "250px"}}>
                 <img src={"https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif"} alt="loading..." style = {{width: "100px", height: "100px"}}/>
             </div>
           )

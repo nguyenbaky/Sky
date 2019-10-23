@@ -5,8 +5,6 @@ import './App.css';
 import MenuPage from './components/Menu/Menu'
 import TopHeader from './components/TopHeader/TopHeader'
 import Footer from "./components/Footer/Footer"
-import API from '././pages/Database/APICnn';
-
 import HomePage from './pages/HomePage/HomePage'
 import AdminPage from "./pages/AdminPage/AdminPage";
 import Services from "./pages/Services/Services";
@@ -17,9 +15,7 @@ import CreateKey from "./pages/CreateKey/CreateKey"
 import Demo from "./pages/Demo/Demo";
 import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
-
-
-const api = new API();
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 
 
@@ -27,11 +23,15 @@ class App extends Component {
 
   routes = [
     {
-      path: "/homepage",
+      path: "/create-key",
       main: ({match}) => <CreateKey match = {match} data = {this.props.data}/>
     },
     {
       path: "/dashboard",
+      main: ({match,history}) => <Dashboard match = {match} history = {history} data = {this.props.data}/>
+    },
+    {
+      path: "/introduce",
       main: ({match,history}) => <HomePage match = {match} history = {history} data = {this.props.data}/>
     },
     {
@@ -75,12 +75,6 @@ class App extends Component {
     }
 ]
   render() {
-    var state = localStorage.getItem('state');
-    if(state)
-    {
-        window.location.reload();
-        localStorage.removeItem('state');
-    }
     var display = "none";
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser")) 
     {
@@ -93,6 +87,7 @@ class App extends Component {
         }}>
            <TopHeader display = {display} />
             <MenuPage display = {display} data = {this.props.data}/>
+            
           <div >
           <link  rel="stylesheet" href="./servicesStyle/css/style.css"/>
          

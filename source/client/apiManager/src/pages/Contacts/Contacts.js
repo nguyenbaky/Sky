@@ -15,16 +15,11 @@ class Contacts extends Component {
       first_name: "",
       last_name: "",
       content: "",
-      data: [],
+      data: this.props.data,
       complete: null,
     };
   }
   componentWillMount() {
-    api.getData().then(response => {
-      this.setState({
-        ...this.state,
-        data: response
-      })
       this.state.data.map(value=>{
         if(value.account === this.state.account)
         {
@@ -39,7 +34,6 @@ class Contacts extends Component {
             avatar: value.avatar
           })
         }
-      })
     })
 
     if(localStorage.getItem("FacebookID"))
@@ -139,6 +133,16 @@ class Contacts extends Component {
                     <div className="col-md-6 form-group">
                       <label htmlFor="tel">Tel. Number</label>
                       <input type="text" id="tel" className="form-control form-control-lg" value = {this.state.phone}/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 form-group">
+                      <label htmlFor="eaddress">Your company</label>
+                      <input type="text" id="eaddress" className="form-control form-control-lg"/>
+                    </div>
+                    <div className="col-md-6 form-group">
+                      <label htmlFor="tel">Position</label>
+                      <input type="text" id="tel" className="form-control form-control-lg"/>
                     </div>
                   </div>
                   <div className="row">
