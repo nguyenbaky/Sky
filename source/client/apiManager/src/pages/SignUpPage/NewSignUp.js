@@ -18,7 +18,6 @@ class NewSignUp extends Component{
     this.back = this.back.bind(this);
     this.confirm = this.confirm.bind(this);
     this.handleinput = this.handleinput.bind(this);
-    localStorage.removeItem("move");
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || null,
       lpassword: JSON.parse(localStorage.getItem('lstate')) || null,
@@ -144,11 +143,12 @@ class NewSignUp extends Component{
           avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
         }
       ]
-       Object.entries(datapost).map( async ([key,val],i)=>{
-       await api.postData(val).then( response =>{
+       Object.entries(datapost).map(([key,val],i)=>{
+        api.postData(val).then( response =>{
           localStorage.setItem("move", true)
+          window.location.reload()
         })
-        window.location.reload()
+       
       }) 
       
     }

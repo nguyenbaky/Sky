@@ -71,7 +71,10 @@ class NewSignIn extends Component{
 
     render(){
       var logout = localStorage.getItem('logout');
-     
+      if(localStorage.getItem("move"))
+      {
+        localStorage.removeItem("move");
+      }
       if(logout)
       {
         localStorage.clear();
