@@ -110,7 +110,8 @@ class NewSignUp extends Component{
     {
       var data = {
         code: this.state.code,
-        email: this.state.lemail
+        email: this.state.lemail,
+        contain: "Đây là code của bạn để xác thực tài khoản: "
       }
       api.SendMail(data).then(res=>{
         console.log(res);
@@ -180,6 +181,7 @@ class NewSignUp extends Component{
               <span className="login100-form-title p-b-59" style = {{textAlign :"center",fontSize: "20px"}}>
                     Verify your account
               </span>
+              <p>Check your email and then please enter code you recived</p>
               <div className="wrap-input100 validate-input" data-validate="Name is required">
                     <span className="label-input100">Your code</span>
                     <input className="input100" type="text" name="name" placeholder="Code..." style = {{fontSize: "20px"}} onChange = {this.handleinput}/>

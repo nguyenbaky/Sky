@@ -548,3 +548,15 @@ iframe {
   -webkit-transition: background 1s;
   border-radius: 25px;
 }
+
+  
+.timer-span{
+  background-color: #3b5998;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+ width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  text-align: center;
+}

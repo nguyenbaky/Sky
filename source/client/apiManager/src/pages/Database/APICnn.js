@@ -134,7 +134,8 @@ class API {
     .post("http://localhost:4000/send-mail",
     {
       code : data.code,
-      email: data.email
+      email: data.email,
+      contain: data.contain
     })
     .then(res=>{
       return res.data
@@ -166,6 +167,17 @@ class API {
   getKey = data=>{
     return axios
     .get(`http://localhost:4000/get-keys/${data.id}`)
+    .then(res=>{
+      return res.data;
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+
+  delkey = (id)=>{
+    return axios
+    .delete(`http://localhost:4000/keys/${id}`)
     .then(res=>{
       return res.data;
     })
