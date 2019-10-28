@@ -6,7 +6,9 @@ import MenuPage from './../../components/Menu/Menu'
 import TopHeader from './../../components/TopHeader/TopHeader'
 class HomePage extends Component{
 
-
+    componentWillMount(){
+        window.scrollTo(0, 0);
+    }
 
     render(){
         return(

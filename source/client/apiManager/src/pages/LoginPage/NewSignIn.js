@@ -23,6 +23,10 @@ class NewSignIn extends Component{
       };
     }
 
+    componentWillMount(){
+      window.scrollTo(0, 0);
+    }
+
     handleUsername(e)
     {
       e.preventDefault();

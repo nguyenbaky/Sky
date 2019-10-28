@@ -1,11 +1,9 @@
 import React, {Component} from "react";
-
-import Footer from "./../../components/Footer/Footer"
-
-import MenuPage from './../../components/Menu/Menu'
-
-import TopHeader from './../../components/TopHeader/TopHeader'
 class About extends Component{
+
+  componentWillMount(){
+    window.scrollTo(0, 0);
+  }
 
     render(){
         return(

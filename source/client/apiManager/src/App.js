@@ -24,7 +24,7 @@ class App extends Component {
   routes = [
     {
       path: "/create-key",
-      main: ({match}) => <CreateKey match = {match} data = {this.props.data}/>
+      main: ({match}) => <CreateKey match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
     },
     {
       path: "/dashboard",
@@ -42,7 +42,7 @@ class App extends Component {
 
     {
       path: "/demo",
-      main: ({match, history}) => <Demo match = {match} history = {history} data = {this.props.data}/>
+      main: ({match, history}) => <Demo match = {match} history = {history} data = {this.props.data} />
     },
     {
       path: "/admin",
@@ -66,7 +66,7 @@ class App extends Component {
     },
     {
       path: "/profile",
-      main: ({match}) => <ProfilePage match = {match} data = {this.props.data}/>
+      main: ({match}) => <ProfilePage match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
     }
     ,
     {
@@ -74,6 +74,8 @@ class App extends Component {
       main: ({match}) => <ProfilePage match = {match} data = {this.props.data}/>
     }
 ]
+
+
   render() {
     var display = "none";
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser")) 
@@ -81,10 +83,7 @@ class App extends Component {
       display= 'block';
     }
     return (
-        <Router onUpdate={()=> {
-          window.scrollX = 0;
-          window.scrollY = 0;
-        }}>
+        <Router>
            <TopHeader display = {display} />
             <MenuPage display = {display} data = {this.props.data}/>
             

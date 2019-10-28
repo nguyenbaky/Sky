@@ -555,8 +555,12 @@ iframe {
   color: white;
   font-size: 20px;
   font-weight: bold;
- width: 26px;
+  width: 26px;
   height: 26px;
   border-radius: 50%;
   text-align: center;
+}
+
+.notification{
+  color: #00ad5f;
 }

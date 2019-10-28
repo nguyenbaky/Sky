@@ -13,28 +13,40 @@ class Loading extends Component {
     super(props);
     this.state = {
         isLoading: false,
-        data: []
+        data: [],
+        banks: [],
+        name: []
     };
   }
 
 
   componentWillMount() {
+    window.scrollTo(0, 0);
     api.getData().then(response => {
-      console.log('Data fetched', response)
       this.setState({
-           
             data: response,
-            isLoading: true
       })
     })
-    
+    api.getDataURL("http://localhost:4000/banks").then(res=>{
+      this.setState({
+        banks: res,
+      })
+    })
+
+    api.getDataURL("http://localhost:4000/banks-name").then(res=>{
+      console.log(res);
+      this.setState({
+        name: res,
+        isLoading: true
+      })
+    })
   }
   render() {
       if(this.state.isLoading)
       {
           return(
               <div>
-                  <App data = {this.state.data}></App>
+                  <App data = {this.state.data} banks = {this.state.banks} names = {this.state.name}></App>
               </div>
           )
       }

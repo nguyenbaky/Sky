@@ -14,9 +14,14 @@ class Demo extends Component{
         }
     }
 
+    componentWillMount()
+    {
+        window.scrollTo(0, 0);
+    }
+
     componentDidMount()
     {
-        soa.CnnTrans("c38eee5c404aa3836f5deef1949bf82d5395ad81636be4551571283223107518104702335193","hello").then(res=>{
+        soa.CnnTrans("5e8658b64d4f4112b56e1fa85a66f484c6fda28adb62f1691572228159153518104702335193","hello").then(res=>{
             this.setState({
                 value: res.vie
             })

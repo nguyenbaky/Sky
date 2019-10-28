@@ -1,5 +1,11 @@
 import React, {Component} from "react";
 class Services extends Component{
+
+
+    componentWillMount(){
+      window.scrollTo(0, 0);
+    }
+
     render(){
         return(
             

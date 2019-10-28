@@ -3,7 +3,7 @@ import axios from 'axios'
 class API {
   getData = () => {
     return axios
-      .get('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts')
+      .get('http://localhost:4000/users')
       .then(function(response) {
         if (response.status === 200 && response != null) {
           var data = response.data
@@ -20,13 +20,9 @@ class API {
 
   GenKey = (data) => {
     return axios
-      .post('http://localhost:4000/key',
-      {
-        method: data.method,
-        id: data.id,
-        type: data.type,
-        user: data.user,
-        start: data.start
+      .post('http://localhost:4000/key',data)
+      .then(res=>{
+        return res.data;
       })
       .catch(function(error) {
         console.log(error)
@@ -108,8 +104,9 @@ class API {
 
   postData = (data)=>{
     return axios
-    .post('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts',
+    .post('http://localhost:4000/users',
     {
+      id: 0,
       account : data.account,
       password: data.password,
       name: data.name,

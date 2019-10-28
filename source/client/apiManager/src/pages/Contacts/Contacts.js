@@ -20,6 +20,7 @@ class Contacts extends Component {
     };
   }
   componentWillMount() {
+    window.scrollTo(0, 0);
       this.state.data.map(value=>{
         if(value.account === this.state.account)
         {

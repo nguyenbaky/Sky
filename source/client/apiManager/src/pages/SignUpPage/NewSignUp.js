@@ -18,6 +18,8 @@ class NewSignUp extends Component{
     this.back = this.back.bind(this);
     this.confirm = this.confirm.bind(this);
     this.handleinput = this.handleinput.bind(this);
+    this.timer = 0;
+    
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || null,
       lpassword: JSON.parse(localStorage.getItem('lstate')) || null,
@@ -32,6 +34,7 @@ class NewSignUp extends Component{
       modal: false,
       code: this.randomkey(),
       recode: "",
+      seconds: 15,
       msg: null,
     };
   }
@@ -108,6 +111,20 @@ class NewSignUp extends Component{
     }
     else
     {
+
+      this.setState({
+        seconds: 15
+    })
+    this.timer = setInterval(()=>{
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      seconds
+    });
+    if(seconds === 0)
+    {
+        clearInterval(this.timer);
+    }
+    }, 1000);
       var data = {
         code: this.state.code,
         email: this.state.lemail,
@@ -159,10 +176,12 @@ class NewSignUp extends Component{
     }
   }
 
+  componentWillMount(){
+    window.scrollTo(0, 0);
+  }
+
   RenderModal = ()=>{
-  
-    if(this.state.modal)
-    {
+
       const backdropStyle = {
         position: 'fixed',
         top: 0,
@@ -172,6 +191,23 @@ class NewSignUp extends Component{
         backgroundColor: 'rgba(24, 23, 23, 0.308)',
         padding: 50
       };
+      var notification = null;
+      if(this.state.seconds === 0)
+      {
+        notification = (
+          <div><label className = "notification">Check you email and then enter code you recived</label></div>
+        )
+      }
+      else
+      {
+        notification = (
+          <div>
+                  <div class="row">
+                    <div class="col-sm-6"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
+                  </div>
+            </div>
+        )
+      }
       return(
         <div id="modal-id" style={backdropStyle}>
           <div class="modal-dialog" >
@@ -181,7 +217,7 @@ class NewSignUp extends Component{
               <span className="login100-form-title p-b-59" style = {{textAlign :"center",fontSize: "20px"}}>
                     Verify your account
               </span>
-              <p>Check your email and then please enter code you recived</p>
+             {notification}
               <div className="wrap-input100 validate-input" data-validate="Name is required">
                     <span className="label-input100">Your code</span>
                     <input className="input100" type="text" name="name" placeholder="Code..." style = {{fontSize: "20px"}} onChange = {this.handleinput}/>
@@ -201,7 +237,6 @@ class NewSignUp extends Component{
         </div>
         
       )
-    }
   }
 
 

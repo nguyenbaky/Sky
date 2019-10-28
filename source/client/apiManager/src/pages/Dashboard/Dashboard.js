@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Chart from './Chart';
 import API from '../../pages/Database/APICnn';
-
 const api = new API();
 
 class Dashboard extends Component{
@@ -11,7 +10,6 @@ class Dashboard extends Component{
         super(props)
         this.handleinput = this.handleinput.bind(this);
         this.timer = 0;
-        this.countDown = this.countDown.bind(this);
         this.state = {
             data: [],
             fakedata:[],
@@ -22,6 +20,7 @@ class Dashboard extends Component{
             lemail: localStorage.getItem("FacebookUser")||localStorage.getItem("GoogleUser"),
             userData: this.props.data,
             seconds: 15,
+            showModal: false
         }
     }
 
@@ -59,23 +58,12 @@ class Dashboard extends Component{
                })
             })
     }
-    
-
-    
-      countDown = ()=> {
-        // Remove one second, set state so a re-render happens.
-        let seconds = this.state.seconds - 1;
-        this.setState({
-          seconds
-        });
-        if(seconds === 0)
-        {
-            clearInterval(this.timer);
-        }
-      }
+  
+      
 
     back = ()=>{
-     }
+      clearInterval(this.timer);
+    }
 
      
 
@@ -88,10 +76,14 @@ class Dashboard extends Component{
                 window.location.reload();
             })
         }
+        else
+        {
+          alert("Incorect! please try again!")
+        }
     }
     
 
-    RenderModal = ()=>{
+    RenderModalDelClick = ()=>{
           const backdropStyle = {
             position: 'fixed',
             top: 0,
@@ -101,6 +93,23 @@ class Dashboard extends Component{
             backgroundColor: 'rgba(24, 23, 23, 0.308)',
             padding: 50
           };
+          var notification = null;
+          if(this.state.seconds === 0)
+          {
+            notification = (
+              <div><label className = "notification">Check your email and then enter code you recived</label></div>
+            )
+          }
+          else
+          {
+            notification = (
+              <div>
+                      <div class="row">
+                        <div class="col-sm-6"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
+                      </div>
+                </div>
+            )
+          }
           return(     
             <div  class="modal fade" id="modal-id" style={backdropStyle}>
               <div class="modal-dialog" >
@@ -111,10 +120,7 @@ class Dashboard extends Component{
                         confirm delete key
                   </span>
                   
-                  <div>
-                      s: {this.state.seconds}
-                </div>
-
+                  {notification}
                   <div className="wrap-input100 validate-input" data-validate="Name is required">
                         <span className="label-input100">Your code</span>
                         <input className="input100" type="text" name="name" placeholder="Code..." style = {{fontSize: "20px"}} onChange = {this.handleinput}/>
@@ -133,9 +139,11 @@ class Dashboard extends Component{
               </div>
             </div>
             
+
           )
       }
       
+
       handleinput(e){
         this.setState({recode: e.target.value})
         console.log(this.state.recode);
@@ -150,7 +158,7 @@ class Dashboard extends Component{
         return this.s4();
       }
 
-    delclick = async (e)=>
+    delclick = (e)=>
     {
         
         this.setState({
@@ -158,7 +166,16 @@ class Dashboard extends Component{
             id: e.target.value,
             seconds: 15
         })
-        this.timer = setInterval(this.countDown, 1000);
+        this.timer = setInterval(()=>{
+        let seconds = this.state.seconds - 1;
+        this.setState({
+          seconds
+        });
+        if(seconds === 0)
+        {
+            clearInterval(this.timer);
+        }
+        }, 1000);
         var lemail = "";
         if(localStorage.getItem("ID"))
         {
@@ -218,8 +235,8 @@ class Dashboard extends Component{
                     <td>{value.type}</td>
                     <td>{value.user}</td>
                     <td>{value.start}</td>
-                    <td> <button type = "button" class="fa fa-trash-o fa-lg" value = {value.id} onClick = {this.delclick} data-toggle="modal" href='#modal-id'></button></td>
-                    <td><button type = "button" class="fa fa-eye fa-lg" value = {value.id} onClick = {this.vieclick}></button></td>
+                    <td>{value.count}</td>
+                    <td> <button type = "button" class="fa fa-trash-o fa-lg" value = {value.id} onClick = {this.delclick} data-toggle="modal" href='#modal-id'></button></td> 
                 </tr>
             )
         })
@@ -253,7 +270,7 @@ class Dashboard extends Component{
         {
         return(
         <div>
-            {this.RenderModal()}
+            {this. RenderModalDelClick()}
             <div class="row" style = {{width: "90%", marginLeft: "10%", marginTop:"2%"}}>
                 <div class="col-sm-10">
                         <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="" onChange = {this.handleSearch}/>
@@ -270,8 +287,8 @@ class Dashboard extends Component{
                         <th>Type</th>
                         <th>User code</th>
                         <th>Start date</th>
+                        <th>Called</th>
                         <th>Action</th>
-                        <th>Detail</th>
                     </tr>
                     </thead>
                     <tbody>
