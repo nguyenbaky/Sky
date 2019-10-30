@@ -29,6 +29,17 @@ class API {
       })
   }
 
+  forgotpassword = (data) => {
+    return axios
+      .post('http://localhost:4000/forgotpassword',data)
+      .then(res=>{
+        return res.data;
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
+
 
   getDataURL = (url) =>{
     return axios
