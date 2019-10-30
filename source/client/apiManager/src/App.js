@@ -15,7 +15,8 @@ import CreateKey from "./pages/CreateKey/CreateKey"
 import Demo from "./pages/Demo/Demo";
 import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
-import Dashboard from "./pages/Dashboard/Dashboard"
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword"
 
 
 
@@ -38,6 +39,10 @@ class App extends Component {
       path: "/",
       exact: true,
       main: ({match, history}) => <NewSignIn match = {match} history = {history} data = {this.props.data}/>
+    },
+    {
+      path: "/forgot-password",
+      main: ({match, history}) => <ForgetPassword match = {match} history = {history} data = {this.props.data}/>
     },
 
     {

@@ -142,6 +142,15 @@ class NewSignIn extends Component{
                         </div>
                         
                     </div>
+
+                    <div style = {{textAlign: "center"}}>
+                    <div class="col-sm-12"> <Link to ="/forgot-password"  className="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                        Forgot password
+                      <i className="fa fa-long-arrow-right m-l-5" />
+                    </Link></div>
+                            
+                    
+                    </div>
                   </div>
                 </form>
               </div>
