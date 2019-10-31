@@ -13,6 +13,9 @@ class ProfilePage extends Component{
     this.handleUsername = this.handleUsername.bind(this);
     this.handleLastname = this.handleLastname.bind(this);
     this.handleFirstname = this.handleFirstname.bind(this);
+    this.handleoldpassword = this.handleoldpassword.bind(this);
+    this.handlenewpassword = this.handlenewpassword.bind(this);
+    this.handleconfirmnewpassword = this.handleconfirmnewpassword.bind(this);
     this.edit = this.edit.bind(this);
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
@@ -22,7 +25,12 @@ class ProfilePage extends Component{
       last_name: "",
       redirect: false,
       data: this.props.data,
-      id: 0
+      id: 0,
+      profile_active: null,
+      changepassword_active: "active",
+      handlenewpassword: "",
+      handleoldpassword: "",
+      handleconfirmnewpassword: ""
     };
   }
   componentWillMount() {
@@ -145,42 +153,44 @@ class ProfilePage extends Component{
       }
     }
 
-    render(){
+    profile = ()=>{
+      this.setState({
+        profile_active: "active",
+        changepassword_active: null
+      })
+    }
+
+    changepassword = ()=>{
+      this.setState({
+        profile_active: null,
+        changepassword_active: "active"
+      })
+    }
+
+    handleoldpassword(e)
+    {
+      e.preventDefault();
+      this.setState({handleoldpassword: e.target.value});
+    }
+
+    handlenewpassword(e)
+    {
+      e.preventDefault();
+      this.setState({handlenewpassword: e.target.value});
+    }
+
+    handleconfirmnewpassword(e)
+    {
+      e.preventDefault();
+      this.setState({handleconfirmnewpassword: e.target.value});
+    }
+
+    Re_render = ()=>{
+      if(this.state.profile_active){
         return(
-          <div>
-        <hr />
-        <div className="container bootstrap snippet">
-          <div className="row">
-            
-            {/* <div className="col-sm-2"><a href="/users" className="pull-right"><img title="profile image" className="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100" /></a></div> */}
-          </div>
-          <div className="row">
-            <div className="col-sm-3">{/*left col*/}
-              <div className="text-center">
-                <img src={this.state.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
-                <h6>Upload a different photo...</h6>
-                <input type="file" className="text-center center-block file-upload" onChange={this.onChangeHandler} webkitRelativePath/>
-              </div><br />
-              <div className="panel panel-default">
-                <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
-                <div className="panel-body"><Link to = "/">SoundAPI.com</Link></div>
-              </div>
-             
-              <div className="panel panel-default">
-                <div className="panel-heading">Social Media</div>
-                <div className="panel-body">
-                  <i className="fa fa-facebook fa-2x" /> <i className="fa fa-github fa-2x" /> <i className="fa fa-twitter fa-2x" /> <i className="fa fa-pinterest fa-2x" /> <i className="fa fa-google-plus fa-2x" />
-                </div>
-              </div>
-            </div>{/*/col-3*/}
-            <div className="col-sm-9">
-              <ul className="nav nav-tabs">
-                <li className="active"><a data-toggle="tab" href="#home">Profile</a></li>
-                
-              </ul>
-              <div className="tab-content">
+                        <div className="tab-content">
                 <div className="tab-pane active" id="home">
-                  <hr />
+                 
                   <div className="form" id="registrationForm">
                     <div className="form-group">
                       <div className="col-xs-6">
@@ -229,10 +239,95 @@ class ProfilePage extends Component{
                       </div>
                     </div>
                   </div>
-                  <hr />
-                </div>{/*/tab-pane*/}
-                
-          </div>{/*/col-9*/}
+                </div> 
+          </div>
+        )
+      }
+      if(this.state.changepassword_active)
+      {
+        return(
+          <div className="tab-content">
+          <div className="tab-pane active" id="home">
+           
+            <div className="form" id="registrationForm">
+            
+              <div class="row">
+                  <div class="col-sm-6">
+                  <label ><h4>Current password</h4></label>
+                  <input className="form-control" type="password" name="oldpassword" placeholder="Current password..." name="oldpassword" id = 'oldpassword' value = {this.state.handleoldpassword} onChange = {this.handleoldpassword}/>
+                  </div>
+                  <div class="col-sm-6">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-sm-6">
+                  <label ><h4>New password</h4></label>
+                  <input className="form-control"  type="password" name="newpassword" placeholder = "New password..." id = 'newpassword' value = {this.state.handlenewpassword} onChange = {this.handlenewpassword}/>
+                  </div>
+                  <div class="col-sm-6">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-sm-6">
+                  <label ><h4>Confirm new password</h4></label>
+                  <input className="form-control"  type="password" name="confirmnewpassword" placeholder = "New password..." id = 'confirmnewpassword' value = {this.state.handleconfirmnewpassword} onChange = {this.handleconfirmnewpassword}/>
+                  </div>
+                  <div class="col-sm-6">
+                  </div>
+              </div>
+       
+              <div className="form-group">
+                <div className="col-xs-12">
+                  <br />
+                  {this.RenderRedirect}
+                  <button className="btn btn-lg btn-success" onClick={this.edit}><i className="glyphicon glyphicon-ok-sign" /> Save</button>
+                  <button className="btn btn-lg" type="reset" onClick={this.reset}><i className="glyphicon glyphicon-repeat" /> Reset</button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+    </div>
+        )
+      }
+    }
+
+    render(){
+        return(
+          <div>
+        <div className="container bootstrap snippet">
+          <div className="row">
+            
+           
+          </div>
+          <div className="row">
+            <div className="col-sm-3">
+              <div className="text-center">
+                <img src={this.state.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
+                <h6>Upload a different photo...</h6>
+                <input type="file" className="text-center center-block file-upload" onChange={this.onChangeHandler} webkitRelativePath/>
+              </div>
+              <div className="panel panel-default">
+                <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
+                <div className="panel-body"><Link to = "/">SoundAPI.com</Link></div>
+              </div>
+             
+              <div className="panel panel-default">
+                <div className="panel-heading">Social Media</div>
+                <div className="panel-body">
+                  <i className="fa fa-facebook fa-2x" /> <i className="fa fa-github fa-2x" /> <i className="fa fa-twitter fa-2x" /> <i className="fa fa-pinterest fa-2x" /> <i className="fa fa-google-plus fa-2x" />
+                </div>
+              </div>
+            </div>{/*/col-3*/}
+            <div className="col-sm-9">
+              <ul className="nav nav-tabs">
+                <li className={this.state.profile_active} onClick = {this.profile} style = {{cursor: "pointer"}}><a data-toggle="tab" >Profile</a></li>
+                <li className={this.state.changepassword_active} onClick = {this.changepassword} style = {{cursor: "pointer"}}><a data-toggle="tab" >Change password</a></li>
+              </ul>
+              {this.Re_render()}
         </div>{/*/row*/}
 
       </div>
