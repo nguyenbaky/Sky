@@ -16,7 +16,8 @@ import Demo from "./pages/Demo/Demo";
 import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import ForgetPassword from "./pages/ForgetPassword/ForgetPassword"
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import ChangePassword from "./pages/ChangePassword/ChangePassword"
 
 
 
@@ -43,6 +44,10 @@ class App extends Component {
     {
       path: "/forgot-password",
       main: ({match, history}) => <ForgetPassword match = {match} history = {history} data = {this.props.data}/>
+    },
+    {
+      path: "/change-password",
+      main: ({match, history}) => <ChangePassword match = {match} history = {history} data = {this.props.data}/>
     },
 
     {
@@ -83,9 +88,13 @@ class App extends Component {
 
   render() {
     var display = "none";
-    if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser")) 
+    if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser"))  
     {
       display= 'block';
+    }
+    if(localStorage.getItem("change"))
+    {
+      display = 'none';
     }
     return (
         <Router>

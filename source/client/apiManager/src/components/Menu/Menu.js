@@ -211,6 +211,7 @@ class Menu extends Component{
                             <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header" style ={{marginTop: '5px'}}/>
                                 <div class="dropdown-content">
                                     <Link to ={`/${name}`} className = "Link"><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
+                                    <Link to = "/change-password" className = "Link"><span ><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{"Change password"}</span></Link>
                                     <Link to = {`/${link}`} className = "Link"><span onClick = {this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
                                 </div>
                            </div>
