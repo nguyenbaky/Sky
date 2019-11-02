@@ -130,6 +130,16 @@ class Menu extends Component{
         })
     }
 
+    profile = ()=>{
+        localStorage.setItem("profile", "active");
+        localStorage.removeItem("change");
+    }
+
+    change = ()=>{
+        localStorage.setItem("change", "active");
+        localStorage.removeItem("profile");
+    }
+
 
     render(){
         var name = 'Login';
@@ -210,8 +220,7 @@ class Menu extends Component{
                         <div className = "dropdown">
                             <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header" style ={{marginTop: '5px'}}/>
                                 <div class="dropdown-content">
-                                    <Link to ={`/${name}`} className = "Link"><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
-                                    <Link to = "/change-password" className = "Link"><span ><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{"Change password"}</span></Link>
+                                    <Link to ={`/${name}`} className = "Link" onClick = {this.profile}><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
                                     <Link to = {`/${link}`} className = "Link"><span onClick = {this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
                                 </div>
                            </div>

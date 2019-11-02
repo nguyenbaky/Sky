@@ -19,13 +19,22 @@ class Dashboard extends Component{
             recode: "",
             lemail: localStorage.getItem("FacebookUser")||localStorage.getItem("GoogleUser"),
             userData: this.props.data,
-            seconds: 15,
+            seconds: 10,
             showModal: false
         }
     }
 
     componentWillMount()
     {
+      if(localStorage.getItem("ID"))
+      {
+          this.state.userData.map(value=>{
+              if(localStorage.getItem("ID") === value.id.toString())
+              {
+                this.setState({lemail: value.email})
+              }
+          })
+      }
         var data = {};
         if(localStorage.getItem("FacebookID")){
             data = {id: localStorage.getItem("FacebookID")}
@@ -164,7 +173,7 @@ class Dashboard extends Component{
         this.setState({
             ...this.state,
             id: e.target.value,
-            seconds: 15
+            seconds: 10
         })
         this.timer = setInterval(()=>{
         let seconds = this.state.seconds - 1;
@@ -176,16 +185,6 @@ class Dashboard extends Component{
             clearInterval(this.timer);
         }
         }, 1000);
-        var lemail = "";
-        if(localStorage.getItem("ID"))
-        {
-            this.state.userData.map(value=>{
-                if(value.id === localStorage.getItem("ID"))
-                {
-                    this.setState({lemail})
-                }
-            })
-        }
         var data = {
             code: this.state.code,
             email: this.state.lemail,

@@ -16,7 +16,10 @@ class ProfilePage extends Component{
     this.handleoldpassword = this.handleoldpassword.bind(this);
     this.handlenewpassword = this.handlenewpassword.bind(this);
     this.handleconfirmnewpassword = this.handleconfirmnewpassword.bind(this);
+    this.handlephone = this.handlephone.bind(this);
+    this.handlenumofbank = this.handlenumofbank.bind(this);
     this.edit = this.edit.bind(this);
+    this.changeAvatar = this.changeAvatar.bind(this);
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
@@ -26,11 +29,13 @@ class ProfilePage extends Component{
       redirect: false,
       data: this.props.data,
       id: 0,
-      profile_active: null,
-      changepassword_active: "active",
+      profile_active: localStorage.getItem("profile"),
+      changepassword_active:localStorage.getItem("change"),
+      setting_active: localStorage.getItem("setting"),
       handlenewpassword: "",
       handleoldpassword: "",
-      handleconfirmnewpassword: ""
+      handleconfirmnewpassword: "",
+      notifycation: "",
     };
   }
   componentWillMount() {
@@ -46,7 +51,8 @@ class ProfilePage extends Component{
             id: value.id,
             phone: value.phone,
             email: value.email,
-            avatar: value.avatar
+            avatar: value.avatar,
+            numofbank: value.numofbank
           })
         }
       })
@@ -93,28 +99,24 @@ class ProfilePage extends Component{
   }
   reset = ()=>{
     this.setState({
-      ...this.state,
       first_name:"",
       last_name:"",
-      laccount:"",
-      lpassword:""
+      phone: "",
+      numofbank: ""
     })
   }
     edit = () =>{
-      axios.put(`http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/${this.state.id}`,{
-        account: this.state.laccount,
-        password: this.state.lpassword,
-        name: this.state.last_name + " " + this.state.first_name 
+      var data = {
+        id: localStorage.getItem("ID"),
+        name: this.state.last_name + " " + this.state.first_name,
+        phone: this.state.phone,
+        numofbank: this.state.numofbank,
+        avatar: this.state.avatar
+      }
+      api.putdata(data).then(res=>{
+        window.location.reload();
       })
-      .then(response =>{
-        console.log(response);
-        console.log("1");
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  
-    }
+}
     handleUsername(e)
     {
       this.setState({laccount: e.target.value});
@@ -135,35 +137,45 @@ class ProfilePage extends Component{
       this.setState({last_name: String(e.target.value)});
     }
 
+    handlephone = (e)=>{
+      this.setState({phone: e.target.value})
+    }
+
+    handlenumofbank = (e)=>{
+      this.setState({numofbank: e.target.value})
+    }
+
     
    
     onChangeHandler = e =>{
-      var file = e.target.files[0]
-      console.log(file);
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        this.setState({
-          avatar: reader.result
-        })
-      };
-      
-      reader.onerror = function (error) {
-        console.log('Error: ', error);
-      }
+      var file = e.target.files[0];
+      var path = URL.createObjectURL(file)
+      this.setState({
+        avatar: path
+      })
     }
 
     profile = ()=>{
       this.setState({
         profile_active: "active",
-        changepassword_active: null
+        changepassword_active: null,
+        setting_active: null,
       })
     }
 
     changepassword = ()=>{
       this.setState({
         profile_active: null,
-        changepassword_active: "active"
+        changepassword_active: "active",
+        setting_active: null,
+      })
+    }
+
+    setting = ()=>{
+      this.setState({
+        profile_active: null,
+        changepassword_active: null,
+        setting_active: "active",
       })
     }
 
@@ -185,6 +197,53 @@ class ProfilePage extends Component{
       this.setState({handleconfirmnewpassword: e.target.value});
     }
 
+    changeAvatar = (e)=>
+    {
+      this.setState({avatar: e.target.value})
+    }
+
+    change = ()=>{
+      var check = false;
+      var id = null;
+      this.state.data.map(value=>{
+        if(localStorage.getItem("user")=== value.account && this.state.handleoldpassword === value.password)
+        {
+          check = true;
+          id = value.id;
+        }
+      })
+      if(check)
+      {
+        if(this.state.handlenewpassword === this.state.handleconfirmnewpassword)
+        {
+          var data = {
+            id,
+            password: this.state.handlenewpassword
+          }
+          api.changepassword(data).then(res=>{
+            this.setState({
+              handleoldpassword: "",
+              handlenewpassword: "",
+              handleconfirmnewpassword: "",
+              notifycation: "Password change successfully"
+            })
+
+            setTimeout(() => {
+              this.setState({notifycation: ""})
+            }, 1500);
+          })
+        }
+        else
+        {
+          alert("nhập lại mật khẩu không chính xác")
+        }
+      }
+      else
+      {
+        alert("bạn nhập mật khẩu hiện tại không chính xác");
+      }
+    }
+
     Re_render = ()=>{
       if(this.state.profile_active){
         return(
@@ -195,31 +254,31 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="first_name" ><h4>First name</h4></label>
-                        <input type="text" className="form-control"  name="first_name" id="first_name"  value={this.state.first_name} title="enter your first name if any." onChange={this.handleFirstname} />
+                        <input type="text" className="form-control"  name="first_name" id="first_name" placeholder = "enter your first name" value={this.state.first_name} title="enter your first name if any." onChange={this.handleFirstname} />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="last_name" ><h4>Last name</h4></label>
-                        <input type="text" className="form-control"   name="last_name" id="last_name" value={this.state.last_name} title="enter your last name if any." onChange={this.handleLastname}/>
+                        <input type="text" className="form-control"   name="last_name" id="last_name" placeholder = "enter your last name" value={this.state.last_name} title="enter your last name if any." onChange={this.handleLastname}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="phone" ><h4>Phone</h4></label>
-                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value = {this.state.phone}/>
+                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value = {this.state.phone} onChange={this.handlephone}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="mobile" ><h4>Card Number</h4></label>
-                        <input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." />
+                        <input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." value={this.state.numofbank} onChange={this.handlenumofbank}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="account" ><h4>Username</h4></label>
-                        <input type="text" className="form-control"  name="email" id="email" onChange={this.handleUsername} value={this.state.account}/>
+                        <input type="text" className="form-control"  name="email" id="email" onChange={this.handleUsername} value={this.state.account} readOnly/>
                       </div>
                     </div>
                    
@@ -227,15 +286,17 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="email" ><h4>email</h4></label>
-                        <input type="text" className="form-control"  name="email" id="email"  title="enter your password2." value={this.state.email}/>
+                        <input type="text" className="form-control"  name="email" id="email"  title="enter your password2." value={this.state.email} readOnly/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-12">
-                        <br />
-                        {this.RenderRedirect}
+                        
+                        <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                        <div>
                         <button className="btn btn-lg btn-success" onClick={this.edit}><i className="glyphicon glyphicon-ok-sign" /> Save</button>
                         <button className="btn btn-lg" type="reset" onClick={this.reset}><i className="glyphicon glyphicon-repeat" /> Reset</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -280,10 +341,10 @@ class ProfilePage extends Component{
        
               <div className="form-group">
                 <div className="col-xs-12">
-                  <br />
-                  {this.RenderRedirect}
-                  <button className="btn btn-lg btn-success" onClick={this.edit}><i className="glyphicon glyphicon-ok-sign" /> Save</button>
-                  <button className="btn btn-lg" type="reset" onClick={this.reset}><i className="glyphicon glyphicon-repeat" /> Reset</button>
+                  <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                  <div>
+                  <button className="btn btn-lg btn-success" onClick={this.change}><i className="glyphicon glyphicon-ok-sign" />Change</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,9 +367,15 @@ class ProfilePage extends Component{
           <div className="row">
             <div className="col-sm-3">
               <div className="text-center">
+
+                
                 <img src={this.state.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
                 <h6>Upload a different photo...</h6>
                 <input type="file" className="text-center center-block file-upload" onChange={this.onChangeHandler} webkitRelativePath/>
+                <div class="form-group">
+                  <label>Your avatar URL</label>
+                  <input type="text" class="form-control" name="" id="" aria-describedby="helpId" value={this.state.avatar} onChange={this.changeAvatar}/>
+                </div>
               </div>
               <div className="panel panel-default">
                 <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
@@ -326,6 +393,7 @@ class ProfilePage extends Component{
               <ul className="nav nav-tabs">
                 <li className={this.state.profile_active} onClick = {this.profile} style = {{cursor: "pointer"}}><a data-toggle="tab" >Profile</a></li>
                 <li className={this.state.changepassword_active} onClick = {this.changepassword} style = {{cursor: "pointer"}}><a data-toggle="tab" >Change password</a></li>
+                <li className={this.state.setting_active} onClick = {this.setting} style = {{cursor: "pointer"}}><a data-toggle="tab" >Setting</a></li>
               </ul>
               {this.Re_render()}
         </div>{/*/row*/}

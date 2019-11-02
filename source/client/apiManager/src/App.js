@@ -46,11 +46,6 @@ class App extends Component {
       main: ({match, history}) => <ForgetPassword match = {match} history = {history} data = {this.props.data}/>
     },
     {
-      path: "/change-password",
-      main: ({match, history}) => <ChangePassword match = {match} history = {history} data = {this.props.data}/>
-    },
-
-    {
       path: "/demo",
       main: ({match, history}) => <Demo match = {match} history = {history} data = {this.props.data} />
     },
@@ -91,10 +86,6 @@ class App extends Component {
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser"))  
     {
       display= 'block';
-    }
-    if(localStorage.getItem("change"))
-    {
-      display = 'none';
     }
     return (
         <Router>

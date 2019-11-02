@@ -40,6 +40,17 @@ class API {
       })
   }
 
+  changepassword = (data) =>{
+    return axios
+    .post('http://localhost:4000/changepassword',data)
+    .then(res=>{
+      return res.data;
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+  }
+
 
   getDataURL = (url) =>{
     return axios
@@ -47,61 +58,6 @@ class API {
       .then(function(response) {
         if (response.status === 200 && response != null) {
           var data = response.data
-          return data
-        } else {
-          throw new Error('Empty data')
-        }
-      })
-      .catch(function(error) {
-        console.log(error)
-        return [] // Return empty array in case error response.
-      })
-  }
-
-  putData = (data, id) =>{
-    return axios({
-      method: 'put',
-      url : `http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts/${id}`,
-      data: data
-    })
-    .then(function(response){
-      console.log('thành công rồi')
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
-  }
-
-  putDataWithParamAccount = (data, Account) =>{
-    return axios({
-      method: 'put',
-      url : `http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts`,
-      data: data,
-      params: {
-        account: 'account1'
-      }
-    })
-    .then(function(response){
-      console.log('thành công rồi')
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
-  }
-
-  getDataWithAccountParams = (account) =>
-  {
-    return axios
-      .get('http://5d8a1f54b2568e0014d884cb.mockapi.io/api/v1/accounts', {
-        params: {
-          account: account
-        }
-      })
-      .then(function(response) {
-        if (response.status === 200 && response != null) {
-          var data = response.data
-          console.log(response.data);
-          console.log("thanh cong roi")
           return data
         } else {
           throw new Error('Empty data')
@@ -179,6 +135,17 @@ class API {
       return res.data;
     })
     .catch(function(err){
+      console.log(err);
+    })
+  }
+
+  putdata = (data)=>{
+    return axios
+    .put(`http://localhost:4000/users`,data)
+    .then(res=>{
+      return res.data;
+    })
+    .catch((err)=>{
       console.log(err);
     })
   }

@@ -34,7 +34,7 @@ class NewSignUp extends Component{
       modal: false,
       code: this.randomkey(),
       recode: "",
-      seconds: 15,
+      seconds: 10,
       msg: null,
     };
   }
@@ -113,7 +113,7 @@ class NewSignUp extends Component{
     {
 
       this.setState({
-        seconds: 15
+        seconds: 10
     })
     this.timer = setInterval(()=>{
     let seconds = this.state.seconds - 1;
