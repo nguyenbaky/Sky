@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import axios from 'axios'
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
 import API from '../Database/APICnn';
@@ -28,6 +27,7 @@ class ProfilePage extends Component{
       last_name: "",
       redirect: false,
       data: this.props.data,
+      banks: this.props.banks,
       id: 0,
       profile_active: localStorage.getItem("profile"),
       changepassword_active:localStorage.getItem("change"),
@@ -36,6 +36,9 @@ class ProfilePage extends Component{
       handleoldpassword: "",
       handleconfirmnewpassword: "",
       notifycation: "",
+      check: false,
+      icon: "fa fa-check-circle-o",
+      color: "green",
     };
   }
   componentWillMount() {
@@ -91,7 +94,6 @@ class ProfilePage extends Component{
           avatar
         })
       }
-    
   }
   RenderRedirect = ()=>{
     if(this.state.relodirect)
@@ -113,9 +115,17 @@ class ProfilePage extends Component{
         numofbank: this.state.numofbank,
         avatar: this.state.avatar
       }
-      api.putdata(data).then(res=>{
-        window.location.reload();
-      })
+      if(this.state.check)
+      {
+        api.putdata(data).then(res=>{
+          window.location.reload();
+        })
+      }
+      else
+      {
+        alert("Chúng tôi không tìm thấy số tài khoản của bạn! xin vui lòng kiểm tra lại");
+      }
+      
 }
     handleUsername(e)
     {
@@ -143,6 +153,20 @@ class ProfilePage extends Component{
 
     handlenumofbank = (e)=>{
       this.setState({numofbank: e.target.value})
+      this.setState({
+        icon: "fa fa-times-circle-o",
+        color: "red"
+      })
+      this.state.banks.map(value=>{
+        if(e.target.value === value.Cardnum)
+        {
+          this.setState({
+            check:true,
+            icon: "fa fa-check-circle-o",
+            color: "green"
+          })
+        }
+      })
     }
 
     
@@ -272,7 +296,12 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="mobile" ><h4>Card Number</h4></label>
-                        <input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." value={this.state.numofbank} onChange={this.handlenumofbank}/>
+                        
+                       
+                        <div class="row">
+                          <div class="col-sm-10"><input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." value={this.state.numofbank} onChange={this.handlenumofbank}/></div>
+                          <div class="col-sm-2" > <i class= {this.state.icon + " " + "fa-3x"} style={{color: this.state.color}} aria-hidden="true"></i></div>
+                        </div>
                       </div>
                     </div>
                     <div className="form-group">

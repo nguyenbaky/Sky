@@ -11,12 +11,36 @@ class CreateKey extends Component{
     this.create = this.create.bind(this);
     this.dashboard = this.dashboard.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.check = this.check.bind(this);
+    //this.check = this.check.bind(this);
     this.handleCountry = this.handleCountry.bind(this);
     this.handlebank = this.handlebank.bind(this);
     this.inputcard = this.inputcard.bind(this);
     this.handleCompany = this.handleCompany.bind(this);
     this.handlePhone = this.handlePhone.bind(this);
+
+    var Country = "Vietnam";
+    var Bank =  "Vietcombank";
+    var numofbank = "";
+    var check = "";
+    var id = localStorage.getItem("ID");
+    this.props.data.map(value=>{
+      if(id === value.id.toString())
+      {
+        numofbank = value.numofbank;
+        check = "Corect";
+        return;
+      }
+    })
+
+    this.props.banks.map(value=>{
+      if(numofbank === value.Cardnum)
+      {
+        Country = value.Country;
+        Bank = value.Name;
+        return;
+      }
+    })
+
     this.state = {
       maccount :JSON.parse(localStorage.getItem('laccount')) || '',
       mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -30,10 +54,10 @@ class CreateKey extends Component{
       copied: false,
       name : "",
       select: "Free Trial",
-      check: false,
-      Country: "Vietnam",
-      Bank: "Vietcombank",
-      check: "",
+      //check: false,
+      Country,
+      Bank,
+      check,
       card: "",
       color:"green",
       modal: "",
@@ -70,7 +94,8 @@ class CreateKey extends Component{
             ...this.state,
             name: value.name,
             email: value.email,
-            phone: value.phone
+            phone: value.phone,
+            card: value.numofbank
           })
         }
       })
@@ -91,21 +116,18 @@ class CreateKey extends Component{
     this.setState({
       card: e.target.value
     })
+    this.setState({
+      check: ""
+    })
     this.state.banks.map(value=>{
       if(e.target.value === value.Cardnum && value.Name === this.state.Bank)
       {
         this.setState({
           check: "Corect"
         })
+        return;
       }
-    })
-    if(e.target.value === "")
-    {
-      this.setState({
-        check: ""
-      })
-    }
-    
+    })  
   }
 
   handleSelect(e)
@@ -132,13 +154,13 @@ class CreateKey extends Component{
     this.setState({Bank: e.target.value});
   }
 
-  async check(e)
-  {
-    var ch = this.state.check;
-    var cb = !ch;
-    await this.setState({check: cb});
-    console.log(this.state.check);
-  }
+  // async check(e)
+  // {
+  //   var ch = this.state.check;
+  //   var cb = !ch;
+  //   await this.setState({check: cb});
+  //   console.log(this.state.check);
+  // }
 
 
 create = async () =>{
@@ -278,8 +300,8 @@ dashboard = ()=>{
                 <option value="Nation">Nation</option>
           </select>
           </label>
-          <label style={{color: "black"}} value={this.state.Bank} onChange={this.handlebank}>Bank
-          <select style = {{outline: "none"}}>
+          <label style={{color: "black"}} >Bank
+          <select style = {{outline: "none"}} value={this.state.Bank} onChange={this.handlebank}>
             {this.loadBanks(this.state.names)}
           </select>
           </label>

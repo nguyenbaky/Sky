@@ -76,7 +76,7 @@ class App extends Component {
     ,
     {
       path: "/:id",
-      main: ({match}) => <ProfilePage match = {match} data = {this.props.data}/>
+      main: ({match}) => <ProfilePage  match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
     }
 ]
 
