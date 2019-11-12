@@ -8,19 +8,16 @@ class Services extends Component{
 
     render(){
         return(
-            
-
-
-       
+                   
             <div>
-            <div className="site-wrap">
+            {/* <div className="site-wrap"> */}
        
-              <div className="site-section">
+              {/* <div className="site-section"> */}
                 <div className="container">
                   <div className="row row-center">
                     <div className="col-lg-4 col-md-6 mb-4">
                       <div className="course-1-item">
-                        <figure className="a">
+                        <figure className="thumnail">
                           <a href="course-single.html"><img src="servicesStyle/images/course_1.jpg" alt="Image" className="img-fluid" /></a>
                           <div className="price">$99.00</div>
                           <div className="category"><h3>Mobile Application</h3></div>  
@@ -149,8 +146,8 @@ class Services extends Component{
               </div>
              
           
-            </div>
-            </div>
+            // </div>
+            // </div>
 
         )
     }
