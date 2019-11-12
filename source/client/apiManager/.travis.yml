@@ -1,13 +1,13 @@
 language: node_js
 node_js:
- -"stable"
+  -"stable"
 cache: npm
 
 install:
  - npm ci
 
 script:
- - npm text
+ - npm test
  - npm run build
 
 deploy:
